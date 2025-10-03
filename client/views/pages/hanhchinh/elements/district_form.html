@@ -1,0 +1,42 @@
+<md-dialog class="col-md-4" aria-label="Thêm-sửa Quận huyện">
+    <div class="row card-header pl-2">
+        <h5 class="mt-2">Thêm/sửa Quận huyện</h5>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancelFn()">
+            <i class="fa fa-close"></i>
+        </md-button>
+    </div>
+    <form ng-cloak name="myForm">
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div class="col">
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label" for="vi_name">Tên Quận Huyện
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-md-9" ng-class="{'has-danger':formChecked && myForm.vi_name.$error.required}">
+                            <input type="text" name="vi_name" id="vi_name" required ng-model="district.vi_name" class="form-control" placeholder="nhập tên Quận Huyện">
+                            <span ng-show="formChecked && myForm.vi_name.$invalid" class="text-danger">Vui lòng nhập tên Quận Huyện!</span>
+                        </div>
+                    </div>
+					<div class="form-group row">
+						<label class="col-md-4 form-control-label" for="name">Mã bưu chính</label>
+						<div class="col-md-8">
+							<input type="text" name="district_postal_code" id="district_postal_code" ng-model="district.district_postal_code" class="form-control" placeholder="Mã bưu điện chuyển phát">
+						</div>
+					</div>
+                </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <div class="text-danger" ng-if="msg">{{msg}}</div>
+            <button type="button" class="btn btn-default btn-sm mr-3" ng-click="cancelFn('not useful')">
+                <i class="icon-action-undo icons"></i> Bỏ qua
+            </button>
+            <button type="button" class="btn btn-primary btn-sm mr-2" ng-click="saveFn('useful')">
+                <i class="fa fa-save fa-lg"></i> Lưu
+            </button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

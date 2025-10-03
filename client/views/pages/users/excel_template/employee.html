@@ -1,0 +1,54 @@
+    <table id="user-tb" class="table table-bordered table-striped table-sm table-responsive" border="1">
+        <thead>
+            <tr class="bg-secondary text-center">
+                <th aria-colspan="13" colspan="13">DANH SÁCH NHÂN VIÊN</th></tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr class="bg-secondary">
+                <th class="bg-secondary">#</th>
+                <th>Emp ID</th>
+                <th>Mã</th>
+                <th>Tên</th>
+                <th>Tài khoản</th>
+                <th>Email</th>
+                <th>Điện thoại</th>
+                <th>Giới tính</th>
+                <th>Ngày sinh</th>
+                <th>Địa chỉ</th>
+                <th>Khoa/Phòng</th>
+                <th>Phân loại</th>
+                <th>Tình trạng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="(key, value) in object">
+                <td class="text-right">{{$index + 1}}</td>
+                <td>{{value.person_id}}</td>
+                <td>{{value.employee_code}}</td>
+                <td nowrap>{{value.name}}</td>
+                <td nowrap>{{value.username}}</td>
+                <td nowrap>{{value.email}}</td>
+                <td nowrap>{{value.phone_number}}</td>
+                <td>{{value.gender}}</td>
+                <td>{{value.date_of_birth | date:'dd/MM/yyyy'}}</td>
+                <td>{{value.address}}</td>
+                <td>{{value.d_vi_name}}</td>
+                <td>{{value.t_vi_name}}</td>
+                <td>{{value.enable}}
+                </td>
+            </tr>
+        </tbody>
+    </table>

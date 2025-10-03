@@ -1,0 +1,112 @@
+<div class="row" ng-controller="cam_doCnt as ctrl">
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs">
+            <li class="nav-item" >
+                <a class="nav-link active" ui-sref="app.camdo({id: 0})">Cầm đồ/Rút quỹ</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link text-primary" ui-sref="app.money_in({type: 3, money_out_id:'', id:0})">Nhập quỹ</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link text-primary" ui-sref="app.trado">Trả đồ/Gia hạn/Thanh lý</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link text-primary" ui-sref="app.baocaongay">Báo cáo ngày</a>
+            </li>
+        </ul>
+    </div>      
+    <div class="col-lg-12">
+        <div class="card border-top-0">
+            <div class="card-header">
+                <span class="col-12 text-truncate float-left"><i class="fa fa-user"></i> Cầm đồ, trả tiền nhà, rút quỹ,...</span>
+            </div>
+            <div class="card-block">
+                <div class="d-flex flex-row mb-3">
+                    <div class="mr-2">Lưu ý:</div>
+                    <div class="text-warning">
+                        - Chọn đúng loại rút quỹ <br/>
+                        - Nhập thông tin rỏ ràng, đầy đủ
+                    </div>
+                </div>
+              <form role="form" ng-cloak name="myForm">
+                <div class="row">
+                    <div class="form-group col-md-3" ng-class="{'has-danger':myForm.type.$error.required&&formChecked}">
+                        <label>Loại rút quỹ<span class="text-danger">*</span></label>
+                        <select class="form-control" id="type" name="type" ng-model="form.type" ng-change="changeTypeFn()" required>
+                            <option value>---Please select---</option>
+                            <option value="0">Cầm đồ</option>
+                            <option value="1">Trả tiền nhà</option>
+                            <option value="2">Rút quỹ</option>
+                            <option value="-1">Chi phí khác</option>
+                        </select>
+                        <span ng-show="formChecked && myForm.type.$error.required" class="text-danger">Vui lòng chọn loại</span>
+                    </div>
+                    <div class="form-group col-md-3" ng-class="{'has-danger':myForm.ngay_cam.$error.required&&formChecked}">
+                        <label ng-if="form.type==0">Ngày cầm<span class="text-danger">*</span></label>
+                        <label ng-if="form.type!=0">Ngày chi quỹ<span class="text-danger">*</span></label>
+                        <input type="text" id="ngay_cam" name="ngay_cam" class="form-control" datepicker="" ng-model="form.ngay_cam" required>
+                        <span ng-show="formChecked && myForm.ngay_cam.$error.required" class="text-danger">Vui lòng nhập ngày</span>
+                    </div>
+                    <div ng-if="form.type==0" class="form-group col-md-3">
+                        <label>Ngày trả dự tính</label>
+                        <input type="text" class="form-control" datepicker="" ng-model="form.ngay_tra_du_tinh">
+                    </div>
+                    <div ng-if="form.type==0" class="form-group col-md-3" ng-class="{'has-danger':myForm.vat_cam.$error.required&&formChecked}">
+                        <label>Vật cầm<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="vat_cam" name="vat_cam" placeholder="Xe máy" ng-model="form.vat_cam" required>
+                        <span ng-show="formChecked && myForm.vat_cam.$error.required" class="text-danger">Vui lòng nhập vật cầm</span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Diễn giải</label>
+                        <input type="text" class="form-control" ng-model="form.dien_giai">
+                    </div>
+                    <div ng-if="form.type==0" class="form-group col-md-3">
+                        <label>Model</label>
+                        <input type="text" class="form-control" ng-model="form.model">
+                    </div>
+                    <div ng-if="form.type==0" class="form-group col-md-3">
+                        <label>Mã số</label>
+                        <input type="text" class="form-control" ng-model="form.ma_so">
+                    </div>
+                    <div class="form-group col-md-3" ng-class="{'has-danger':myForm.tien_vay.$error.required&&formChecked}">
+                        <label ng-if="form.type==0">Tiền vay<span class="text-danger">*</span></label>
+                        <label ng-if="form.type!=0">Số tiền chi<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="tien_vay" name="tien_vay" placeholder="1.000.000" ng-model="form.tien_vay" int-num="9" required>
+                        <span ng-show="formChecked && myForm.tien_vay.$error.required" class="text-danger">Vui lòng nhập tiền vay</span>
+                    </div>
+                    <div class="form-group col-md-3" ng-class="{'has-danger':myForm.nguoi_cam.$error.required&&formChecked}">
+                        <label>Người giao dịch<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="nguoi_cam" name="nguoi_cam" placeholder="Nguyễn Văn A" ng-model="form.nguoi_cam" required>
+                        <span ng-show="formChecked && myForm.nguoi_cam.$error.required" class="text-danger">Vui lòng nhập tên người cầm</span>
+                    </div>
+                    <div ng-if="form.type==0" class="form-group col-md-3">
+                        <label>Số Điện thoại<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="phone" name="phone" ng-model="form.phone" required>
+                        <span ng-show="formChecked && myForm.phone.$error.required" class="text-danger">Vui lòng nhập số điện thoại</span>
+                    </div>
+                    <div ng-if="form.type==0" class="form-group col-md-3">
+                        <label>Số Điện thoại/CMND/Thẻ<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="id_card" name="id_card" ng-model="form.id_card" required>
+                        <span ng-show="formChecked && myForm.id_card.$error.required" class="text-danger">Vui lòng nhập số CMND/Thẻ</span>
+                    </div>
+                    <div ng-if="form.type!=0" class="form-group col-md-3">
+                        <label>Số Điện thoại/CMND/Thẻ</label>
+                        <input type="text" class="form-control" ng-model="form.id_card">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Ghi chú</label>
+                        <input type="text" class="form-control" ng-model="form.ghi_chu">
+                    </div>
+                </div>
+                <div class="row" permission="quan_ly_quy_edit,cam_do_edit">
+                    <div class="form-group col-md-3">
+                        <button type="button" class="btn btn-primary btn-block" ng-click="saveFn()"><i class="fa fa-save fa-lg"></i> Lưu </button>
+                    </div>
+                    <div class="col text-danger">{{msg}}</div>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>

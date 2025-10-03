@@ -1,0 +1,25 @@
+<md-dialog class="col-sm-7 col-md-5 col-lg-4" aria-label="Cảnh báo">
+    <div class="row card-header pl-2">
+        <h5 class="mt-2">{{confirm.title}}</h5>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancelFn()">
+            <i class="fa fa-close"></i>
+        </md-button>
+    </div>
+    
+    <md-dialog-content>
+    <div class="md-dialog-content">
+        <span ng-bind-html="confirm.content"></span>
+    </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+    <span flex></span>
+    <button type="button" class="btn btn-default" ng-click="cancelFn()">
+        {{confirm.cancelText}}
+    </button>
+    <button type="button" ng-if="confirm.okText" class="btn btn-primary mx-3" ng-click="okFn()">
+        {{confirm.okText}}
+    </button>
+    </md-dialog-actions>
+</md-dialog>

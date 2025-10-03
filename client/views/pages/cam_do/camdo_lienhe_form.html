@@ -1,0 +1,56 @@
+<md-dialog class="col-md-9" aria-label="Ghi chú">
+    <div class="row card-header pl-2">
+        <h5 class="mt-2">Ghi chú</h5>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancelFn()">
+            <i class="fa fa-close"></i>
+        </md-button>
+    </div>
+    <form role="form" ng-cloak name="myForm">
+        <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="col-md-6 float-left">
+                <div class="form-group row">
+                    <div class="col-12">
+                        <p class="my-0">{{data.vat_cam}} <i>{{data.dien_giai}}</i></p>
+                        <p class="my-0">{{data.model}} <i>{{data.ma_so}}</i></p>
+                        <p class="my-0">{{data.tien_vay | number}}</p>
+                        <p class="my-0">Khách: {{data.nguoi_cam}}</p>
+                        <p class="my-0">Ghi chú: {{data.ghi_chu}}</p>
+                        <p class="my-0">{{data.ngay_cam | date : 'dd/MM/yyyy'}} - {{data.ngay_tra_du_tinh | date : 'dd/MM/yyyy'}}</p>
+                        <p class="text-danger my-0">Quá hạn {{data.over_due_days | number : 0}} ngày</p>
+                        <p class="my-0">SĐT: {{data.phone}}</p>
+                        <p class="my-0">Số lần liên hệ: {{data.status_call | number : 0}}</p>
+                        <p class="my-0" ng-bind-html="data.note_call"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 float-left">
+                <div class="form-group row" ng-class="{'has-danger':myForm.note_call_input.$error.required&&formChecked}">
+                    <div class="col-12">
+                        <label class="form-control-label" for="note">Liên hệ:<span class="text-danger">*</span></label>
+                        <input type="text" name="note_call_input" id="note_call_input" ng-model="data.note_call_input" class="form-control" required placeholder="Ví dụ: Khách hẹn mai đóng tiền">
+                        <span ng-show="formChecked && myForm.note_call_input.$error.required" class="text-danger">Vui lòng nhập thông tin liên hệ</span>
+                        <span ng-repeat="(key, value) in inputConsts">
+                        <button type="button" class="btn btn-default btn-sm mr-3 mt-1" ng-click="inputLienHeFn(value)">
+                            {{value.text}}
+                        </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </md-dialog-content>
+    
+        <md-dialog-actions layout="row">
+        <span flex></span>
+        <div class="text-danger mr-3" ng-if="msg">{{msg}}</div>
+        <button type="button" class="btn btn-default btn-sm mr-3" ng-click="cancelFn('not useful')">
+            <i class="icon-action-undo icons"></i> Bỏ qua
+        </button>
+        <button type="button" class="btn btn-primary btn-sm mr-3" ng-click="saveFn('useful')">
+            <i class="fa fa-save fa-lg"></i> Lưu liên hệ
+        </button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

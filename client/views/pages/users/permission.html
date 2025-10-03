@@ -1,0 +1,112 @@
+<div class="row" ng-controller="permissionCnt as ctrl">
+    <div class="col-lg-12">
+            <ul class="nav nav-tabs">
+                <li class="nav-item" permission="assign_permission">
+                    <a class="nav-link active" href="#!/user/permission">Phân quyền</a>
+                </li>
+                <li class="nav-item" permission="assign_permission">
+                    <a class="nav-link text-primary" href="#!/user/group_permission">Quyền nhóm</a>
+                </li>
+                <li class="nav-item" permission="permission_management">
+                    <a class="nav-link text-primary" href="#!/user/permission_management">Quản lý quyền</a>
+                </li>
+            </ul>
+    </div>      
+    <div class="col-lg-12">
+        <div class="card border-top-0">
+            <div class="card-header pb-0">
+                <!--<i class="fa fa-power-off"></i> Phân quyền cho user-->
+                <div class="btn-group mb-0 mt-2 float-left">
+                    <button class="btn" ng-class="{'btn-primary':group_action}" ng-click="activeGroupFn('group_action')">Nhóm chức năng</button>
+                    <button class="btn" ng-class="{'btn-primary':group_report}" ng-click="activeGroupFn('group_report')">Nhóm báo cáo</button>
+                </div>    
+                <span class="float-right mr-2">
+                    <a class="switch" ng-hide="hide" ng-click="showAllFn()" href="#"><i class="fa fa-minus-square-o fa-lg"></i></a>
+                    <a ng-hide="!hide" ng-click="showAllFn()" href="#"><i class="fa fa-plus-square-o fa-lg"></i></a>
+                </span>
+            </div>
+            <div class="card-block">
+                <div class="form-group row">
+                    <div class="col-md-4 col-sm-6 mt-2">
+                        <md-autocomplete
+                            ng-disabled="ctrl.isDisabled"
+                            md-no-cache="ctrl.noCache"
+                            md-selected-item="ctrl.selectedItem"
+                            md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                            md-search-text="ctrl.searchText"
+                            md-selected-item-change="ctrl.selectedItemChange(item)"
+                            md-items="item in ctrl.querySearch(ctrl.searchText)"
+                            md-item-text="item.username"
+                            md-min-length="0"
+                            placeholder="Nhập username hoặc tên">
+                            <md-item-template>
+                            <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.username}} ({{item.name}})</span>
+                            </md-item-template>
+                            <!--md-not-found>
+                            Không tìm thấy "{{ctrl.searchText}}".
+                            <!-- a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a- - >
+                            </ md-not-found -->
+                        </md-autocomplete>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mt-3">
+                        Người dùng:<strong> {{user.user_id}} {{user.name}}</strong>
+                    </div>
+                    <div ng-if="user.acl_group_id" class="col-md-4 col-sm-6 mt-3">
+                        <div class="row">
+                            <div class="col-6">Nhóm:<strong> {{group.name}} [{{group.value}}]</strong></div>
+                            <div class="col-6"><button type="button" class="btn btn-primary btn-block" ng-click="showConfirmResetGroup(event, group)">Reset theo nhóm</button></div>
+                        </div>                        
+                    </div>
+                    <div ng-if="user.user_id && !user.acl_group_id" class="col-md-4 col-sm-6 mt-3">
+                        <div class="row">
+                            <div class="col-6">Chưa có nhóm</div>
+                            <div class="col-6"><button type="button" class="btn btn-primary btn-block" ng-click="showAddGroup(event, group)">Vào nhóm</button></div>
+                        </div>                        
+                    </div>
+                    <div class="col-12 text-danger" ng-if="msg">{{msg}}</div>
+                </div>
+                <div class="row">
+                        <!--/.col-->
+                    <div class="col-md-6 d-initial" ng-repeat="(key, group) in data" ng-show="(group.act_type_id=='Action'&&group_action)||(group.act_type_id=='Report'&&group_report)">
+                        <div class="card">
+                            <div class="card-header">
+                                {{group.gname}}
+                                <span class="float-right ml-3">
+                                    <a class="switch" ng-hide="group.hide" ng-click="showGroupFn(group)" href="#"><i class="fa fa-minus-square-o fa-lg"></i></a>
+                                    <a ng-hide="!group.hide" ng-click="showGroupFn(group)" href="#"><i class="fa fa-plus-square-o fa-lg"></i></a>
+                                </span>
+                                <label class="switch switch-sm switch-text switch-info float-right mb-0">
+                                    <input type="checkbox" class="switch-input" ng-model="group.on" ng-change="changeGroupPermission(group)">
+                                    <span class="switch-label" data-on="On" data-off="Off"></span>
+                                    <span class="switch-handle"></span>
+                                </label>
+                            </div>
+                            <div class="card-block" ng-hide="group.hide">
+                                <div ng-repeat="(g, action) in group.actions" class="row mb-2">
+                                    <div class="col-2 my-auto">
+                                        <label class="switch switch-text d-inline-block" ng-class="{'switch-secondary': action.group_map_id>0, 'switch-info': !action.group_map_id}">
+                                            <input type="checkbox" class="switch-input" ng-model="action.on" ng-change="changePermissionFn(event, action)">
+                                            <span class="switch-label"  data-on="On" data-off="Off"></span>
+                                            <span class="switch-handle"></span>                                
+                                        </label>
+                                    </div>
+                                    <div class="col-10 my-auto" ng-class="{'font-weight-bold': action.group_map_id>0}">
+                                        <div class="row my-auto">
+                                            <span class="col-2 pl-0 pr-0 text-truncate">{{action._type}}</span>
+                                            <span class="col-9">{{action.url}}</span>
+                                        </div>
+                                        <div class="row">
+                                            <span class="col-2 pl-0 pr-0 text-truncate">{{action._order}}</span>
+                                            <span class="col-9">{{action.name}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>

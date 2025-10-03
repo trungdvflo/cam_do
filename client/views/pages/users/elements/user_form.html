@@ -1,0 +1,123 @@
+<md-dialog class="col-md-9" aria-label="Thêm sửa user">
+    <div class="row card-header pl-2">
+        <h5 class="mt-2">Thêm/sửa user</h5>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancelFn()">
+            <i class="fa fa-close"></i>
+        </md-button>
+    </div>
+    <form ng-cloak name="myForm">
+    
+        <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="col-md-6 float-left">
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="username">Tài khoản <span class="text-danger">*</span></label>
+                    <div class="col-md-9" ng-class="{'has-danger':myForm.username.$error.required&&formChecked}">
+                        <input type="text" name="username" id="username" required ng-model="user.username" ng-readonly="user.isEdit" class="form-control" placeholder="Username">
+                        <span ng-show="formChecked && myForm.username.$error.required" class="text-danger">Vui lòng nhập tài khoản</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="password">Mật khẩu</label>
+                    <div class="col-md-9">
+                        <input type="password" name="password" id="password" ng-model="user.password" class="form-control" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="password2">Nhập lại</label>
+                    <div class="col-md-9">
+                        <input type="password" name="password2" id="password2" ng-model="user.password2" class="form-control" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="sign">Chữ ký</label>
+                    <div class="col-md-5">
+                        <input type="text" name="sign" id="sign" ng-model="user.signature_url" class="form-control" placeholder="Chữ ký">
+                        <img src="/uploads/users/{{user.signature_url}}"  style="width:100px;"/>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary" type="button" id="btnupladhide2" onclick="document.getElementById('uploadImage').click(); return false;">
+                            Upload chử ký
+                        </button>
+                        <input type="file" id="uploadImage" ngf-select ng-model="file" name="file" 
+                            ngf-pattern="'image/*'" accept="image/*"ngf-max-size="20MB" ng-change="uploadImageFn()" ng-show="false" />
+                        <i ng-show="myForm.file.$error.required">*required</i><br>
+                        <i ng-show="myForm.file.$error.maxSize">File too large 
+                        {{ctrl.file.size / 1000000|number:1}}MB: max 20M</i>
+                        <img style="width:100px;" ngf-thumbnail="file" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" >Kích hoạt</label>
+                    <div class="col-md-9">
+                        <label class="switch switch-default switch-text switch-info d-inline-block">
+                            <input type="checkbox" class="switch-input" ng-model="user.on">
+                            <span class="switch-label"  data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>                                
+                        </label>
+                    </div>
+                </div>
+            </div>                
+            <div class="col-md-6 float-left">
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="employee">Nhân viên</label>
+                    <div class="col-md-9">
+                        <md-autocomplete
+                            md-no-cache="ctrl.noCache"
+                            md-selected-item="ctrl.selectedItem"
+                            md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                            md-search-text="ctrl.searchText"
+                            md-selected-item-change="ctrl.selectedItemChange(item)"
+                            md-items="item in ctrl.querySearch(ctrl.searchText)"
+                            md-item-text="item.name"
+                            md-min-length="0"
+                            placeholder="--Chọn Nhân viên--"
+                            md-autoselect="true"
+                            md-menu-class="form-control">
+                          <md-item-template>
+                            <span class="item-title">
+                              <span><strong> {{item.name}} </strong></span>
+                            </span>
+                            <span class="item-metadata">
+                              <span>
+                                - <i>{{item.employee_code}}</i>
+                              </span>
+                            </span>
+                          </md-item-template>
+                        </md-autocomplete>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="branch">Chi nhánh</label>
+                    <div class="col-md-9">
+                        <select ng-model="user.branch" class="form-control" ng-options="option.vi_name for option in branchs track by option.branch_id">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="role">Vai trò - nhóm</label>
+                    <div class="col-md-9">
+                        <!--select ng-model="user.acl_group_id" class="form-control" size="8" placeholder="Vai trò">
+                            <option ng-repeat="(key, value) in groups" value="{{value.id}}" >{{value.name}}</option>
+                        </select-->
+                        <select ng-model="user.group" class="form-control" ng-options="option.name for option in groups track by option.id" size="7">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </md-dialog-content>
+    
+        <md-dialog-actions layout="row">
+        <span flex></span>
+        <div class="text-danger mr-3" ng-if="msg">{{msg}}</div>
+        <button type="button" class="btn btn-default btn-sm mr-3" ng-click="cancelFn('not useful')">
+            <i class="icon-action-undo icons"></i> Bỏ qua
+        </button>
+        <button type="button" class="btn btn-primary btn-sm mr-2" ng-click="saveFn('useful')">
+            <i class="fa fa-save fa-lg"></i> Lưu
+        </button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

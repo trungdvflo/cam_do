@@ -1,0 +1,48 @@
+<md-dialog class="col-md-6 col-sm-6 col-8">
+    <div class="row card-header pl-2">
+        <h5 class="mt-2">Chọn chi nhánh</h5>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancelFn()">
+            <i class="fa fa-close"></i>
+        </md-button>
+    </div>
+    <form ng-cloak name="myForm">
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div class="card  ">
+                    <div class="card-header h6 " layout="row">
+                        <div flex="" class="text-center">
+                            <h6>Chào mừng {{vm.user.name}} {{vm.user.username}}</h6>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <form role="form" method="post" name="LoginForm" ng-submit="loginFn()">
+                            <span class="text-danger" ng-show="msg">{{msg}}</span>
+                            <div class="input-group mb-3" layout="row"
+                                ng-class="{true:'has-danger', false: 'has-success'}[myForm.branch.$error.required]">
+                                <span flex="35" class="input-group-addon">Chọn chi nhánh</span>
+                                <select name="branch" required class="form-control" ng-model="vm.branch"
+                                    ng-options="d.vi_name for d in vm.branchs"></select>
+                            </div>
+                            <div class="input-group mb-3" layout="row">
+                                <span flex="35" class="input-group-addon">Thời gian làm việc</span>
+                                <input class="form-control" min="{{vm.work_day| date:'yyyy-MM-dd'}}" type="date"
+                                    ng-model="vm.work_day">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <button type="submit" flex class="btn btn-dark" ng-click="vm.regiterBranchFn()">
+                Chọn
+            </button>
+            <button type="button" flex class="btn btn-secondary" ng-click="cancelFn('not useful')">
+                <i class="icon-action-undo icons"></i> Thoát
+            </button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>

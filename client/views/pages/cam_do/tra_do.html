@@ -1,0 +1,169 @@
+<div class="row" ng-controller="traDoCnt as ctrl">
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs">
+            <li class="nav-item" >
+                <a class="nav-link text-primary" ui-sref="app.camdo({id: 0})">Cầm đồ/Rút quỹ</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link text-primary" ui-sref="app.money_in({type: 3, money_out_id:'', id:0})">Nhập quỹ</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link text-primary" ng-class="{'active':$state.includes('app.trado')}" ui-sref="app.trado">Trả đồ/Gia hạn/Thanh lý</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link text-primary" ui-sref="app.baocaongay">Báo cáo ngày</a>
+            </li>
+        </ul>
+    </div>      
+    <div class="col-lg-12">
+        <div class="card border-top-0">
+            <div class="card-header">
+                <span class="col-6 text-truncate float-left"><i class="fa fa-user"></i> Trả đồ / Gia hạn / Thanh lý</span>
+            </div>
+            <div class="card-block">
+              <form role="form" ng-cloak name="myForm" ng-submit="findFn()">
+                <div class="row">
+                  <div class="form-group col-md-2 col-6">
+                      <label>Từ ngày</label>
+                      <input type="text" class="form-control" datepicker="" ng-model="form.tu_ngay">
+                  </div>
+                  <div class="form-group col-md-2 col-6">
+                      <label>Đến ngày</label>
+                      <input type="text" class="form-control" datepicker="" ng-model="form.den_ngay">
+                  </div>
+                  <div class="form-group col-md-4 col-12">
+                      <label>Từ khóa tìm kiếm</label>
+                      <input type="text" class="form-control" ng-model="form.keyword">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label class="d-sm-down-none">&nbsp;</label>
+                    <button type="submit" class="btn btn-primary form-control" ><i class="fa fa-search fa-lg"></i> Tìm </button>
+                  </div>
+                </div>
+              </form>
+              <div class="row" ng-if="form.money_out_open==1">
+                <div class="col-12">
+                  Tổng: <strong>{{tong_chi | number}}</strong>&nbsp;&nbsp;
+                  SL: <strong>{{data_out.length | number}}</strong>&nbsp;&nbsp;
+                  <span>Đến Hạn: <strong>{{over_due | number}}</strong></span> 
+                </div>
+              </div>
+              <div class="table-responsive">
+                  <table class="table table-hover table-outline">
+                      <thead class="thead-default">
+                          <tr>
+                              <th class="px-0 text-center">No</th>
+                              <th nowrap class="px-0 text-center">
+                                <a href="#" ng-click="sortFn()">Ngày cầm <i ng-if="form.sort=='ngay_cam'" class="icon icon-arrow-down"></i><br/>
+                                <i>Dự trả</i> <i ng-if="form.sort=='ngay_tra_du_tinh'" class="icon icon-arrow-down"></i></a>
+                              </th>
+                              <th nowrap class="text-center">Vật cầm<br/><i>Diễn giải</i></th>
+                              <th nowrap class="text-center">Model<br/><i>Mã số</i></th>
+                              <th class="text-right">Tiền vay<br/><i>Khách</i></th>
+                              <th class="px-0 text-center">Tình trạng</th>
+                              <th class="text-center" style="min-width:120px">Ghi chú</th>
+                              <th class="text-right" ng-if="form.money_out_open==1">Thao tác</th>
+                          </tr>
+                      </thead>
+                      <tbody class="table-sm" style="border:0px" ng-repeat="(key, value) in data_out">
+                          <tr>
+                              <td>{{$index + 1}}</td>
+                              <td nowrap class="text-center">
+                                  {{value.ngay_cam | date:'dd/MM/yy'}} <br/>
+                                  <i ng-class="{'text-danger':value.over_due==1}">{{value.ngay_tra_du_tinh | date : 'dd/MM'}}</i>
+                              </td>
+                              <td nowrap class="text-center">{{value.vat_cam}}<br/><i>{{value.dien_giai}}</i></td>
+                              <td nowrap class="text-center">{{value.model}}<br/><i>{{value.ma_so}}</i></td>
+                              <td nowrap class="pl-0 text-right">{{value.tien_vay | number}}<br/>
+                                  <i>{{value.nguoi_cam}}</i></td>
+                              <td nowrap class="text-center">
+                                  <span ng-if="value.trang_thai==0">
+                                    <span ng-if="value.over_due==1" class="text-danger">Quá hạn
+                                        <br/> {{value.over_due_days | number : 0 }} ngày
+                                    </span>
+                                    <span ng-if="value.over_due!=1">Chưa trả </span>
+                                  </span>
+                                  <span ng-if="value.trang_thai==1" class="text-secondary">
+                                      <a href="#" ng-click="showMoneyInFn($event, value)">Đã trả<br/><i>{{value.ngay_gia_han | date : 'dd/MM'}}</i> </a> </span>
+                                  <span ng-if="value.trang_thai==2" class="text-primary">
+                                    <a href="#" ng-click="showMoneyInFn($event, value)">
+                                        <span ng-if="value.over_due==1" class="text-danger">Quá hạn
+                                           <br/> {{value.over_due_days | number : 0 }} ngày
+                                        </span>
+                                        <span ng-if="value.over_due!=1">
+                                        Gia hạn<br/><i>{{value.ngay_gia_han | date : 'dd/MM'}}</i></span>
+                                    </a>
+                                  </span>
+                                  <span ng-if="value.trang_thai==3" class="text-danger">
+                                      <a href="#" ng-click="showMoneyInFn($event, value)" class="text-danger">Thanh lý<br/><i>{{value.ngay_gia_han | date : 'dd/MM'}}</i> </a> </span>
+                              </td>
+                              <td class="text-center">{{value.ghi_chu}} {{value.phone}}
+                                <p class="my-0" ng-bind-html="value.note_call"></p>
+                                  <a href="#" ng-if="form.money_out_open==1" ng-click="ghiChuFn($event, value)"><i class="icon-pencil icons"></i></a></td>
+                              <td class="text-right" ng-if="form.money_out_open==1">
+                                  <!-- <button type="button" class="btn btn-warning btn-sm mb-1" title="Trả cầm đồ" ng-click="traFn($event, value)"><i class="icon-pencil icons"></i> Trả</button>
+                                  <button type="button" class="btn btn-primary btn-sm mb-1" title="Trả góp đồ" ng-click="traGopFn($event, value)"><i class="icon-pencil icons"></i> Trả góp</button>
+                                  <button type="button" class="btn btn-primary btn-sm mb-1" title="Gia hạn đồ" ng-click="giaHanFn($event, value)"><i class="icon-pencil icons"></i> Gia hạn</button>
+                                  <button type="button" class="btn btn-danger btn-sm mb-1" title="Thanh lý đồ" ng-click="thanhLyFn($event, value)" ng-if="value.over_due==1"><i class="icon-pencil icons"></i> Thanh lý</button> -->
+                                  <!-- <button type="button" class="btn btn-sm mb-1" ng-class="{'btn-danger':value.over_due==1, 'btn-primary': value.over_due!=1}" title="Thao tác" ng-click="processFn($event, value)"><i class="icon-pencil icons"></i> Thao tác</button> -->
+                                <div class="dropdown">
+                                    <a class="btn dropdown-toggle dropdown-toggle mr-1" ng-class="{'btn-danger':value.over_due==1, 'btn-primary': value.over_due!=1}" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <span class="d-md-down-none">Thao tác</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#" ng-click="traFn($event, value)"><i class="icon-pencil icons"></i> Trả</a>
+                                        <div class="divider"></div>
+                                        <a class="dropdown-item text-primary" href="#" ng-click="giaHanFn($event, value)"><i class="icon-pencil icons"></i> Gia hạn</a>
+                                        <div class="divider"></div>
+                                        <a class="dropdown-item" href="#" ng-click="traGopFn($event, value)"><i class="icon-pencil icons"></i> Trả góp</a>
+                                        <div class="divider"></div>
+                                        <a class="dropdown-item text-danger" ng-if="value.over_due==1" href="#" ng-click="thanhLyFn($event, value)"><i class="icon-pencil icons"></i> Thanh lý</a>
+                                    </div>
+                                </div>
+                              </td>
+                          </tr>
+                          <tr ng-if="value.gia_han_infos" class="p-0 m-0">
+                              <td></td>
+                              <td colspan="8">
+                                  <table class="table table-hover table-outline">
+                                      <thead class="thead-default">
+                                          <tr>
+                                              <td>TT</td>
+                                              <td>Ngày gia hạn</td>
+                                              <td>Người gia hạn</td>
+                                              <td>Tiền trả</td>
+                                              <td>Tiền lời</td>
+                                              <td>Lãi suất</td>
+                                              <td>Ghi chú</td>
+                                          </tr>
+                                      </thead>
+                                      <tbody class="table-sm">
+                                          <tr ng-repeat="(k, v) in value.gia_han_infos">
+                                              <td>{{$index + 1}}</td>
+                                              <td>{{v.ngay_tra | date : 'dd/MM/yyyy'}}</td>
+                                              <td>{{v.nguoi_tra}}</td>
+                                              <td>{{v.tien_tra | number}}</td>
+                                              <td>{{v.tien_loi | number}}</td>
+                                              <td>{{v.lai_suat | number}}</td>
+                                              <td>{{v.ghi_chu}}</td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </td>
+                          </tr>
+                      </tbody>
+                      <tfoot ng-if="form.money_out_open==1">
+                          <tr class="font-weight-bold">
+                            <td colspan="4">Tổng</td>
+                            <td class="text-right">{{tong_chi | number}}</td>
+                            <td colspan="4"></td>
+                          </tr>
+                      </tfoot>
+                  </table>
+              </div>
+              <div class="row" paging></div>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>

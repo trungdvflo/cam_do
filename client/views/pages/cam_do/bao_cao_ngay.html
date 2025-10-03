@@ -1,0 +1,153 @@
+<div class="row" ng-controller="baoCaoNgayCnt as ctrl">
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs">
+            <li class="nav-item" >
+                <a class="nav-link text-primary" ui-sref="app.camdo({id: 0})">Cầm đồ/Rút quỹ</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link text-primary" ui-sref="app.money_in({type: 3, money_out_id:'', id:0})">Nhập quỹ</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link text-primary" ui-sref="app.trado">Trả đồ/Gia hạn/Thanh lý</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link active" ui-sref="app.baocaongay">Báo cáo ngày</a>
+            </li>
+        </ul>
+    </div>      
+    <div class="col-lg-12">
+        <div class="card border-top-0">
+            <div class="card-header">
+                <span class="col-6 text-truncate float-left"><i class="fa fa-user"></i> Báo cáo thu chi trong ngày</span>
+            </div>
+            <div class="card-block">
+              <!-- <div class="form-group row">
+                  <div class="col-md-2 col-4">
+                      <select class="form-control" id="rp_day" ng-model="rp_day" ng-options="('Ngày '+d) for d in rp_days"></select>
+                  </div>
+                  <div class="col-md-2 col-4">
+                      <select class="form-control" id="rp_month" ng-model="rp_month" ng-options="('Tháng '+m) for m in rp_months"></select>
+                  </div>
+                  <div class="col-md-2 col-4">
+                      <select class="form-control" id="rp_year" ng-model="rp_year" ng-options="y for y in rp_years"></select>
+                  </div>
+              </div> -->
+              <div class="row">
+                  <div class="form-group col-md-2">
+                      <input type="text" class="form-control" datepicker="" ng-model="form.report_date" ng-change="findFn()">
+                  </div>
+                  <div class="form-group col-md-2" ng-if="has_item_not_rpt || !has_rpt_date" permission="quan_ly_quy_edit,cam_do_edit">
+                      <button type="button" class="btn btn-primary btn-block" ng-click="reportFn()">Gởi báo cáo</button>
+                  </div>
+                  <div class="form-group col-md-8 pt-1" ng-if="has_item_not_rpt || !has_rpt_date">
+                      <span class="text-warning">Hãy gởi báo cáo sau 21 giờ cùng ngày, phần phát sinh tính cho ngày hôm sau.</span>
+                  </div>
+                  <div class="form-group col-md-4 pt-1" ng-if="!has_item_not_rpt && has_rpt_date">
+                      <span class="text-warning">Đã gởi báo cáo ngày này.</span>
+                  </div>
+              </div>
+              <div class="row py-3">
+                <div class="col-md-3 text-right text-md-left">Tổng chi: <strong> {{tong_chi | number}}</strong></div>
+                <div class="col-md-3 text-right text-md-left">Tổng thu: <strong>{{tong_thu | number}}</strong></div>
+                <div class="col-md-3 text-right text-md-left">Nhận ban đầu: <strong>{{balance-tong_thu+tong_chi | number}}</strong></div>
+                <div class="col-md-3 text-right text-md-left">Tồn quỹ: <strong>{{balance | number}}</strong></div>
+              </div>
+              <div class="table-responsive">
+                  <table class="table table-hover table-outline">
+                      <thead class="thead-default">
+                          <tr>
+                              <th>No</th>
+                              <th>Ngày cầm</th>
+                              <th>Vật cầm</th>
+                              <th>Diễn giải</th>
+                              <th>Model</th>
+                              <th>Mã số</th>
+                              <th>Tiền vay</th>
+                              <th>Ngày dự tính trả</th>
+                              <th>Người giao dịch</th>
+                              <th>Ghi chú</th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody class="table-sm">
+                          <tr ng-repeat="(key, value) in data_out">
+                              <td>{{$index + 1}}</td>
+                              <td>{{value.ngay_cam | date:'dd/MM/yyyy'}}</td>
+                              <td>{{value.vat_cam}}</td>
+                              <td nowrap>{{value.dien_giai}}</td>
+                              <td>{{value.model}}</td>
+                              <td nowrap>{{value.ma_so}}</td>
+                              <td nowrap>{{value.tien_vay | number}}</td>
+                              <td>{{value.ngay_tra_du_tinh | date : 'dd/MM/yyyy'}}</td>
+                              <td>{{value.nguoi_cam}}</td>
+                              <!-- <td>
+                                  <span ng-if="value.trang_thai==0" class="text-primary pt-2 ml-3 mr-1">Chưa trả </span>
+                                  <span ng-if="value.trang_thai==1" class="text-secondary pt-2 ml-3 mr-1">Đã trả </span>
+                                  <span ng-if="value.trang_thai==2" class="text-secondary pt-2 ml-3 mr-1">Gia hạn </span>
+                                  <span ng-if="value.trang_thai==3" class="text-secondary pt-2 ml-3 mr-1">Thanh lý </span>
+                              </td> -->
+                              <td>{{value.ghi_chu}}</td>
+                              <td class="text-right" nowrap>
+                                  <a href="#" ng-if="value.can_edit" ng-click="updateOutFn(event, value)" title="Sửa"><i class="icon-pencil icons"></i></a>
+                              </td>
+                          </tr>
+                          <tr class="font-weight-bold">
+                            <td colspan="6">Tổng</td>
+                            <td>{{tong_chi | number}}</td>
+                            <td colspan="4"></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <div class="table-responsive">
+                  <table class="table table-hover table-outline">
+                      <thead class="thead-default">
+                          <tr>
+                              <th>No</th>
+                              <th>Ngày cầm</th>
+                              <th>Vật cầm</th>
+                              <th>Diễn giải</th>
+                              <th>Model</th>
+                              <th>Mã số</th>
+                              <th>Tiền gốc</th>
+                              <th>Tiền lãi</th>
+                              <th>Người giao dịch</th>
+                              <th>Ghi chú</th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody class="table-sm">
+                          <tr ng-repeat="(key, value) in data_in">
+                              <td>
+                                <i ng-if="value.trang_thai==1" title="Trả đồ" class="icon-check icons text-primary"></i>
+                                <i ng-if="value.trang_thai==2" title="Gia hạn" class="icon-clock icons text-primary"></i>
+                                <i ng-if="value.trang_thai==3" title="Thanh lý" class="icon-check icons text-danger"></i>
+                                {{$index + 1}}
+                              </td>
+                              <td>{{value.ngay_cam | date:'dd/MM/yyyy'}}</td>
+                              <td>{{value.vat_cam}}</td>
+                              <td nowrap>{{value.dien_giai}}</td>
+                              <td>{{value.model}}</td>
+                              <td nowrap>{{value.ma_so}}</td>
+                              <td nowrap>{{value.tien_tra | number}}</td>
+                              <td nowrap>{{value.tien_loi | number}}</td>
+                              <td>{{value.nguoi_cam}}</td>
+                              <td>{{value.ghi_chu}}</td>
+                              <td class="text-right" nowrap>
+                                  <a href="#" ng-if="value.can_edit" ng-click="updateInFn(event, value)" title="Sửa"><i class="icon-pencil icons"></i></a>
+                              </td>
+                          </tr>
+                          <tr class="font-weight-bold">
+                            <td colspan="6">Tổng</td>
+                            <td>{{tong_tra | number}}</td>
+                            <td>{{tong_loi | number}}</td>
+                            <td colspan="3"></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>

@@ -1,0 +1,241 @@
+<div class="row" ng-controller="permissionManagementCnt as ctrl">
+    <div class="col-lg-12">
+            <ul class="nav nav-tabs" permission="assign_permission">
+                <li class="nav-item">
+                    <a class="nav-link text-primary" href="#!/user/permission">Phân quyền</a>
+                </li>
+                <li class="nav-item" permission="assign_permission">
+                    <a class="nav-link text-primary" href="#!/user/group_permission">Quyền nhóm</a>
+                </li>
+                <li class="nav-item" permission="permission_management">
+                    <a class="nav-link active" href="#!/user/permission_management">Quản lý quyền</a>
+                </li>
+            </ul>
+    </div>      
+    <div class="col-lg-12">
+        <div class="card border-top-0">
+            <div class="card-header mb-2 pb-0">
+                <!--span class="col-4 text-truncate float-left">
+                    <!--<i class="fa fa-align-justify"></i> Quản lý nhóm quyền & quyền -- >
+                    <label class="switch switch-text switch-info d-inline-block">
+                        <input type="checkbox" class="switch-input" ng-model="group_action" >
+                        <span class="switch-label"  data-on="On" data-off="Off"></span>
+                        <span class="switch-handle"></span>                                
+                    </label>
+                    Nhóm chức năng
+                </span>
+                <span class="col-4 text-truncate float-left">
+                    <label class="switch switch-text switch-info d-inline-block">
+                        <input type="checkbox" class="switch-input" ng-model="group_report" >
+                        <span class="switch-label"  data-on="On" data-off="Off"></span>
+                        <span class="switch-handle"></span>                                
+                    </label>
+                    Nhóm báo cáo
+                </span-->
+                <div class="btn-group mb-0 mt-2 float-left">
+                    <button class="btn" ng-class="{'btn-primary':group_action}" ng-click="activeGroupFn('group_action')">Nhóm chức năng</button>
+                    <button class="btn" ng-class="{'btn-primary':group_report}" ng-click="activeGroupFn('group_report')">Nhóm báo cáo</button>
+                </div>
+                <span class="float-right mr-2">
+                    <a class="switch" ng-hide="hide" ng-click="showAllFn()" href="#"><i class="fa fa-minus-square-o fa-lg"></i></a>
+                    <a ng-hide="!hide" ng-click="showAllFn()" href="#"><i class="fa fa-plus-square-o fa-lg"></i></a>
+                </span>
+                <span class="float-right mr-3">
+                    <a href="#" ng-click="showAddGroupFn()"><i class="fa fa-plus fa-lg"></i> Thêm  </a>
+                </span>
+            </div>
+
+            <div class="card-block">
+                <div class="row">
+                    <!--/ add group-->
+                    <div class="col-md-6" ng-if="new_group">
+                        <div class="card">
+                            <div class="card-header">
+                                Thêm group mới
+                            </div>
+                            <div class="card-block">
+                                <div class="form-group row mt-2" >
+                                    <label class="col-md-3 form-control-label mt-1">Mã nhóm quyền</label>
+                                    <div class="col-md-9" >
+                                        <input class="form-control" id="group_id" ng-model="new_group.id" placeholder="ID" />
+                                    </div>
+                                </div>
+                                <div class="form-group row" >
+                                    <label class="col-md-3 form-control-label mt-1">Tên nhóm quyền</label>
+                                    <div class="col-md-9" ng-class="{'has-danger':!new_group.name}">
+                                        <input class="form-control" ng-model="new_group.name" placeholder="Tên nhóm" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label mt-1" for="type_id">Loại quyền</label>
+                                    <div class="col-md-9" ng-class="{'has-danger':!new_group.act_type_id}">
+                                        <select name="type_id" id="type_id" ng-model="new_group.act_type_id" class="form-control">
+                                            <option value="">---Please select---</option> <!-- not selected / blank option -->
+                                            <option value="Action">Chức năng</option> 
+                                            <option value="Report">Báo cáo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" >
+                                    <span ng-if="new_group.msg" class="row text-danger mt-3 ml-1">{{new_group.msg}}</span>
+                                    <button type="button" ng-click="addNewGroupFn(new_group)" class="btn btn-primary mt-1"><i class="fa fa-save fa-lg"></i> Lưu Group</button>
+                                    <button type="button" ng-click="delNewGroupFn(new_group)" class="btn btn-danger mt-1 ml-3"><i class="fa fa-remove"></i> Xóa Group</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ END add group-->
+                
+                    <!--/.col-->
+                    <div class="col-md-6 d-initial" ng-repeat="(key, group) in data" ng-show="(group.act_type_id=='Action'&&group_action)||(group.act_type_id=='Report'&&group_report)">
+                        <div class="card">
+                            <div class="card-header">
+                                {{group.name}}
+                                <span class="float-right">
+                                    <a class="switch" ng-hide="group.hide" ng-click="showGroupFn(group)" href="#"><i class="fa fa-minus-square-o fa-lg"></i></a>
+                                    <a ng-hide="!group.hide" ng-click="showGroupFn(group)" href="#"><i class="fa fa-plus-square-o fa-lg"></i></a>
+                                </span>
+                                <span class="float-right mr-3">
+                                    <a href="#" ng-click="showEditGroupFn(group)"><i class="icon-pencil icons"></i> </a>
+                                </span>
+                                <div ng-show="group.isEdit" class="mt-4">
+                                    <span ng-if="group.msg" class="text-danger mt-3">{{group.msg}}</span>
+                                    <div class="form-group row">
+                                        <label class="col-md-3 form-control-label mt-1">Mã nhóm</label>
+                                        <div class="col-md-9">
+                                            <input class="form-control" readonly  ng-model="group.id" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-3 form-control-label mt-1">Tên nhóm</label>
+                                        <div class="col-md-9" ng-class="{'has-danger':!group.name}">
+                                            <input class="form-control" ng-model="group.name" placeholder="Tên nhóm" />
+                                        </div>
+                                    </div>
+                                    <button type="button" ng-click="updateGroupFn(group)" class="btn btn-primary mt-1"><i class="fa fa-save fa-lg"></i> Lưu Group</button>
+                                    <button type="button" ng-click="delGroupFn(group, event)" ng-hide="group.actions.length>0" class="btn btn-danger mt-1 ml-3"><i class="fa fa-remove"></i> Xóa Group</button>
+                                </div>
+                            </div>
+                            <div class="card-block" ng-hide="group.hide">
+                                <div class="form-group" ng-repeat="(g, action) in group.actions">
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <div class="row">
+                                                <span class="col-2 text-truncate pr-0">{{action._type}}</span>
+                                                <span class="col-10 text-truncate">{{action.url}}</span>
+                                            </div>
+                                            <div class="row">
+                                                <span class="col-2 text-truncate pr-0">{{action._order}}</span>
+                                                <span class="col-10 text-truncate">{{action.name}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-1 my-auto">
+                                            <span class="float-right">
+                                                <a href="#" ng-click="showEditActionFn(action)"><i class="icon-pencil icons"></i></a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div ng-if="action.isEdit">
+                                        <hr/>
+                                        <input class="form-control mt-3 mb-3" readonly ng-model="action._type"/>
+										<div class="form-group row mt-3">
+                                            <label class="col-md-3 form-control-label" for="acl_type">Quyền truy cập</label>
+                                            <div class="col-md-9">
+                                                <select name="acl_type" id="acl_type" ng-model="action.acl_type" class="form-control ng-pristine ng-valid ng-empty ng-touched" aria-invalid="false" style="">
+                                                    <option value="" selected="selected">---Please select---</option>
+                                                    <option value="user">Quyền người dùng</option> 
+                                                    <option value="supper_admin">Quyền Supper Admin</option> 
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 form-control-label mt-1" >Tên quyền</label>
+                                            <div class="col-md-9" ng-class="{'has-danger':!action.name}">
+                                                <input class="form-control" required ng-model="action.name" placeholder="Tên quyền" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 form-control-label mt-1" >Thứ tự quyền</label>
+                                            <div class="col-md-9">
+                                            <input class="form-control" ng-model="action._order" placeholder="Thứ tự quyền" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 form-control-label mt-1" >Mã quyền</label>
+                                            <div class="col-md-9" ng-class="{'has-danger':!action.url}">
+                                            <input class="form-control" required ng-model="action.url" placeholder="Mã quyền" />
+                                            </div>
+                                        </div>
+                                        <span ng-if="action.msg" class="row text-danger mt-3 ml-1">{{action.msg}}</span>
+                                        <button type="button" class="btn btn-primary mt-1" ng-click="updateActionFn(action)"><i class="fa fa-save fa-lg"></i> Lưu Quyền</button>
+                                        <button type="button" class="btn btn-danger mt-1 ml-3" ng-click="delActionFn(group, action, event)"><i class="fa fa-remove"></i> Xóa Quyền</button>
+                                        <hr/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-outline-primary btn-block" ng-click="showAddActionFn(group)"><i class="fa fa-plus fa-lg"></i> Thêm Quyền</button>
+                                    <div class="form-group" ng-if="group.isAddAction">
+										<div class="form-group row mt-3">
+                                            <label class="col-md-3 form-control-label" for="acl_type">Quyền truy cập</label>
+                                            <div class="col-md-9">
+                                                <select name="acl_type" id="acl_type" ng-model="group.new_action.acl_type" class="form-control ng-pristine ng-valid ng-empty ng-touched" aria-invalid="false" style="">
+                                                    <option value="" selected="selected">---Please select---</option>
+                                                    <option value="user">Quyền người dùng</option> 
+                                                    <option value="supper_admin">Quyền Supper Admin</option> 
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row mt-3">
+                                            <label class="col-md-3 form-control-label" for="_type">Loại quyền</label>
+                                            <div class="col-md-9" ng-class="{'has-danger':!group.new_action._type}">
+                                                <select name="_type" id="_type" ng-model="group.new_action._type" class="form-control">
+                                                    <option value="">---Please select---</option> <!-- not selected / blank option -->
+                                                    <option value="BHYT">BHYT</option> 
+                                                    <option value="Quản lý kho">Quản lý kho</option>
+                                                    <option value="Khoa nội trú">Khoa nội trú</option> 
+                                                    <option value="Hoạt động năm">Hoạt động năm</option>
+                                                    <option value="Nội trú">Nội trú</option> 
+                                                    <option value="Danh mục">Danh mục</option>
+                                                    <option value="Kho dược">Kho dược</option> 
+                                                    <option value="Tổng hợp KCB">Tổng hợp KCB</option>
+                                                    <option value="Ngoại trú">Ngoại trú</option> 
+                                                    <option value="Admin">Admin</option>
+                                                    <option value="Nhà thuốc">Nhà thuốc</option> 
+                                                    <option value="Khác">Khác</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 form-control-label" for="name">Tên quyền</label>
+                                            <div class="col-md-9" ng-class="{'has-danger':!group.new_action.name}">
+                                                <input type="text" name="name" id="name" required ng-model="group.new_action.name" class="form-control" placeholder="Tên quyền">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 form-control-label" for="_order">Thứ tự quyền</label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="_order" id="_order" ng-model="group.new_action._order" class="form-control" placeholder="Thứ tự quyền">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 form-control-label" for="url">Mã quyền</label>
+                                            <div class="col-md-9" ng-class="{'has-danger':!group.new_action.url}">
+                                                <input type="text" name="url" id="url" required ng-model="group.new_action.url" class="form-control" placeholder="controller/action">
+                                            </div>
+                                        </div>
+                                        <span ng-if="group.new_action.msg" class="row text-danger mt-3 ml-1">{{group.new_action.msg}}</span>
+                                        <button type="button" class="btn btn-primary mt-1" ng-click="addActionFn(group, group.new_action)"><i class="fa fa-dot-circle-o"></i> Lưu Quyền</button>
+                                        <button type="button" class="btn btn-danger mt-1 ml-3" ng-click="showAddActionFn(group)"><i class="fa fa-close"></i> Đóng </button>
+                                        <hr/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>

@@ -1,0 +1,44 @@
+    <table id="user-tb" class="table table-bordered table-striped table-sm table-responsive" border="1">
+        <thead>
+            <tr class="bg-secondary text-center">
+                    <th aria-colspan="9" colspan="9">DANH SÁCH NGƯỜI DÙNG</th></tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr class="bg-secondary">
+                <th class="bg-secondary">#</th>
+                <th>UID</th>
+                <th>Emp ID</th>
+                <th>Mã</th>
+                <th>Tên</th>
+                <th>Tài khoản</th>
+                <th>Email</th>
+                <th>Điện thoại</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="(key, value) in object">
+                <td class="text-right">{{$index + 1}}</td>
+                <td>{{value.user_id}}</td>
+                <td>{{value.person_id}}</td>
+                <td>{{value.employee_code}}</td>
+                <td nowrap>{{value.name}}</td>
+                <td>{{value.username}}</td>
+                <td nowrap>{{value.email}}</td>
+                <td nowrap>{{value.phone_number}}</td>
+                <td>
+                    <span ng-if="value.enable==1" class="text-primary pt-2 ml-3 mr-1"><i class="fa fa-unlock fa-lg mt-2"></i> </span>
+                    <span ng-if="value.enable==0" class="text-secondary pt-2 ml-3 mr-1"><i class="fa fa-lock fa-lg mt-2"></i> </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>

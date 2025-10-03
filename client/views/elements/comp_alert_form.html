@@ -1,0 +1,104 @@
+<md-dialog class="col-md-9" aria-label="Thêm sửa alert">
+    <div class="row card-header pl-2">
+        <h5 class="mt-2">Thêm/sửa thông báo</h5>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancelFn()">
+            <i class="fa fa-close"></i>
+        </md-button>
+    </div>
+    <form ng-cloak name="myForm">
+    
+        <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="col-md-6 float-left">
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="title">Tiêu đề <span class="text-danger">*</span></label>
+                    <div class="col-md-9" ng-class="{'has-danger':myForm.title.$error.required&&formChecked}">
+                        <!-- <input type="text" name="title" id="title" required ng-model="alert.title" ng-readonly="alert.isEdit" class="form-control" placeholder="title"> -->
+                        <input type="text" name="title" id="title" required ng-model="alert.title" class="form-control" placeholder="title">
+                        <span ng-show="formChecked && myForm.title.$error.required" class="text-danger">Vui lòng nhập tiêu đề</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="short_content">Tóm tắt <span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                        <textarea name="short_content" id="short_content" required ng-model="alert.short_content" class="form-control" placeholder="nội dung ngắn"/>
+                        <span ng-show="formChecked && myForm.short_content.$error.required" class="text-danger">Vui lòng nhập nội dung tóm tắt</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="content">Nội dung <span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                        <textarea name="content" id="content" required ng-model="alert.content" class="form-control" rows="5" placeholder="nội dung"/>
+                        <span ng-show="formChecked && myForm.content.$error.required" class="text-danger">Vui lòng nhập nội dung</span>
+                    </div>
+                </div>
+            </div>                
+            <div class="col-md-6 float-left">
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="employee">Cơ sỡ</label>
+                    <div class="col-md-9 col-sm-9 mt-9">
+                        <!-- <select ng-model="alert.branch" class="form-control" ng-options="option.vi_name for option in branchs track by option.branch_id">
+                        </select> -->
+                        <select ng-model="alert.branch_id" class="form-control" >
+                            <option ng-repeat="(key, value) in branchs" value="{{value.branch_id}}" >{{value.vi_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="role">Khoa</label>
+                    <div class="col-md-9">
+                        <!-- <select ng-model="alert.department" class="form-control" ng-options="option.vi_name for option in departments track by option.department_id">
+                        </select> -->
+                        <select ng-model="alert.department_id" class="form-control" >
+                            <option ng-repeat="(key, value) in departments" value="{{value.department_id}}" >{{value.vi_name}}</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="start_time">Bắt đầu</label>
+                    <div class="col-md-6">
+                        <!-- <input type="date" name="start_time" id="start_time" ng-model="alert.start_time" class="form-control"> -->
+                        <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" id="start_time" name="start_time" ng-model="alert.start_time" datepicker="" class="form-control form-control-sm" placeholder="Ngày bắt đầu">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="start_time">Kết thúc</label>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" id="end_time" name="end_time" ng-model="alert.end_time" datepicker="" class="form-control form-control-sm" placeholder="Ngày kết thúc">
+                        </div>
+                        <!-- <input type="date" name="end_time" id="end_time" ng-model="alert.end_time" class="form-control"> -->
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" >Kích hoạt</label>
+                    <div class="col-md-9">
+                        <label class="switch switch-default switch-text switch-info d-inline-block">
+                            <input type="checkbox" class="switch-input" ng-model="alert.on">
+                            <span class="switch-label"  data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>                                
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </md-dialog-content>
+    
+        <md-dialog-actions layout="row">
+        <span flex></span>
+        <div class="text-danger mr-3" ng-if="msg">{{msg}}</div>
+        <button type="button" class="btn btn-default btn-sm mr-3" ng-click="cancelFn('not useful')">
+            <i class="icon-action-undo icons"></i> Bỏ qua
+        </button>
+        <button type="button" class="btn btn-primary btn-sm mr-2" ng-click="saveFn('useful')">
+            <i class="fa fa-save fa-lg"></i> Lưu
+        </button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

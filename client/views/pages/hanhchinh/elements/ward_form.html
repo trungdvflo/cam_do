@@ -1,0 +1,52 @@
+<md-dialog class="col-md-4" aria-label="Thêm-sửa Phường Xã">
+    <div class="row card-header pl-2">
+        <h5 class="mt-2">Thêm/sửa Phường Xã</h5>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancelFn()">
+            <i class="fa fa-close"></i>
+        </md-button>
+    </div>
+    <form ng-cloak name="myForm">
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div class="col">
+                    <div class="form-group row">
+                        <label class="col-md-4 form-control-label" for="vi_name">Xã phường
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="col-md-8" ng-class="{'has-danger':formChecked && myForm.vi_name.$error.required}">
+                            <input type="text" name="vi_name" id="vi_name" required ng-model="ward.vi_name" class="form-control" placeholder="nhập tên Xã phường">
+                            <span ng-show="formChecked && myForm.vi_name.$invalid" class="text-danger">Vui lòng nhập Xã phường!</span>
+                        </div>
+                    </div>
+					<div class="form-group row">
+						<label class="col-md-4 form-control-label" for="name">Mã bưu chính</label>
+						<div class="col-md-8">
+							<input type="text" name="ward_postal_code" id="ward_postal_code" ng-model="ward.district_postal_code" class="form-control" placeholder="Mã bưu điện chuyển phát">
+						</div>
+					</div>
+                    <div class="form-group row">
+                        <label class="col-md-4 form-control-label" for="auto_suggest_code">Mã viết tắt
+                            <span class="text-danger">*</span>
+                        </label>
+                            <div class="col-md-8" ng-class="{'has-danger':formChecked && myForm.vi_name.$error.required}">
+                                <input type="text" name="auto_suggest_code" id="auto_suggest_code" required ng-model="ward.auto_suggest_code" class="form-control"
+                                    placeholder="Nhập mã viết tắt">
+                                <span ng-show="formChecked && myForm.auto_suggest_code.$invalid" class="text-danger">Vui lòng nhập mã viết tắt!</span>
+                            </div>
+                    </div>
+                </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <div class="text-danger" ng-if="msg">{{msg}}</div>
+            <button type="button" class="btn btn-default btn-sm mr-3" ng-click="cancelFn('not useful')">
+                <i class="icon-action-undo icons"></i> Bỏ qua
+            </button>
+            <button type="button" class="btn btn-primary btn-sm mr-2" ng-click="saveFn('useful')">
+                <i class="fa fa-save fa-lg"></i> Lưu
+            </button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

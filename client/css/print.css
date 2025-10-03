@@ -1,0 +1,356 @@
+html {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: verdana, sans-serif;
+	font-size: 9pt;
+}
+
+#maincontainer {
+	width: 1024px; /*Width of main container*/
+	margin: 0 auto; /*Center container on page*/
+	background: #FFF;
+}
+
+/*Print A5*/
+#A5-portrait {
+	width: 140mm; /*Width of main container*/
+	margin: 0 auto; /*Center container on page*/ 
+	background: #FFF;
+}
+#maincontainer2 {
+	width: 148mm; /*Width of main container*/
+	margin: 0 auto; /*Center container on page*/
+	padding-right: 5mm; 
+	background: #FFF;
+}
+
+/*Print A4 - portrait*/
+#maincontainer3 {
+	width: 204mm;  /*Width of main container*/
+    margin: 0 auto; /*Center container on page*/
+    position: relative;
+    left: 0px;
+    top: 0px; 
+    padding-right:5mm;
+	background: #FFF;
+}
+#maincontainer4 {
+	width: 700px; /*Width of main container*/
+	margin: 0 auto; /*Center container on page*/
+	background: #FFF;
+}
+
+.report-header-big {
+    font-size: 18pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.report-header-big_cls {
+    font-size: 18pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.report-header-medium {
+    font-size: 14pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.report-header-small {
+    font-size: 12pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.report-header-12 {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+.report-header-14 {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+.report-header-16 {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.checked {
+	background-image: url("../img/checked.png");
+	background-repeat: no-repeat;
+	padding-left: 30px;
+}
+
+.un-checked {
+    background-image: url("../img/un-checked.png");
+    background-repeat: no-repeat;
+    padding-left: 30px;
+}
+
+
+table.printDetails {
+	font-size:12px;
+}
+
+table.printDetails td {
+	padding: 1px;
+}
+
+table.printDetails td.label{
+	font-weight: bold;
+	color: #000;
+}
+
+/** Border thin, no padding */
+table.printGrid {
+	font-size:12px;
+}
+
+table.printGrid th {
+	text-align: left;
+	font-weight: bold;
+	border: 1px solid #000;
+	border-left: none; 
+}
+
+table.printGrid th.first {
+	border-left: 1px solid #000;
+}
+
+table.printGrid td {
+	text-align: left;
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000; 
+}
+
+table.printGrid td.first {
+	border-left: 1px solid #000;
+}
+
+/** Border thin, padding td*/
+table.printGrid2 {
+	font-size:9pt;
+}
+
+table.printGrid2 th {
+	text-align: left;
+	font-weight: bold;
+	padding: 6px 5px 6px 5px;
+	border: 1px solid #AAA;
+	border-left: none;	
+}
+
+table.printGrid2 th.first {
+	border-left: 1px solid #AAA;
+}
+
+table.printGrid2 td {
+	text-align: left;
+	padding: 3px 5px 3px 5px;
+	border-right: 1px solid #AAA;
+	border-bottom: 1px solid #AAA;	
+}
+
+table.printGrid2 td.data {
+	text-align: center;
+}
+
+table.printGrid2 td.first {
+	border-left: 1px solid #AAA;
+}
+
+/** Border thin, padding, font-size: small*/
+table.printGrid3 {
+	font-size:11px;
+}
+
+table.printGrid3 th {
+	text-align: left;
+	font-weight: bold;
+	padding: 3px 5px 3px 5px;
+	border: 1px solid #000;
+	border-left: none;
+	text-align: center; 
+}
+
+table.printGrid3 th.first {
+	border-left: 1px solid #000;
+}
+
+table.printGrid3 td {
+	text-align: left;
+	padding: 3px 5px 3px 5px;
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000;	
+}
+
+table.printGrid3 td.data {
+	text-align: center;
+}
+
+table.printGrid3 td.first {
+	border-left: 1px solid #000;
+}
+
+/** No border */
+table.printGrid4 {
+	
+}
+
+table.printGrid4 tr td {
+	border: none;
+	padding: 5px 5px 5px 5px;
+}
+
+/* ppdong 2010-04-12 */
+.total-label {
+    font-weight: bold;
+}
+
+.total-value { 
+    font-weight: bold; 
+    font-size: 15px;
+}
+
+.grandtotal-value { 
+    font-weight: bold; 
+    font-size: 17px;
+}
+
+table td.field-number {
+    text-align: right !important;
+}
+
+/* @GROUP New Form Style With Div */
+.field-label {
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    width: 150px;
+    text-align: left;
+}
+
+.field-value {
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    text-align: left;
+    margin-right: 10px;
+}
+
+.field-row {
+    height: 30px;
+    line-height: 30px;
+}
+
+.group_title {
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px 0px;
+}
+
+.left {
+    float: left;
+}
+
+.bold {
+    font-weight: bold;	
+}
+
+.right {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.a4-landscape {
+    width: 291mm;
+    margin: 0 auto;
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+
+.page_break{
+	page-break-after: always;
+}
+
+.register_form {
+    width: 80mm; /*Width of main container 1/2 A4 size*/
+    margin: 0 auto; /*Center container on page*/
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.uppercase{
+	text-transform: uppercase;
+}
+
+.italic{
+	font-style: italic;
+}
+
+.center{
+	text-align: center !important;
+}
+
+.align-right{
+	text-align: right !important;
+}
+
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th {
+  background-color: #f9f9f9;
+}
+
+.bg {
+    background: url('../images/dotted.png') repeat 100% 100%;
+}
+
+/* .row {
+    height: 24px;
+    line-height: 25px;
+    text-align: left;
+    display: block;
+    clear: both;
+} */
+
+.span-line {
+    display: inline-block;
+    vertical-align: baseline;
+    zoom: 1;
+    position: relative;
+    width: 100%;
+}
+
+div.span-line span, div.span-line label{
+	display: inline-block;
+	vertical-align: top;	
+}
+
+.span-line .none-bg {
+    background-color: #FFF;
+    
+}

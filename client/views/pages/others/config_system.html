@@ -1,0 +1,62 @@
+<div class="row" ng-controller="config_systemCnt as ctrl">
+     
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header mb-3">
+                <span class="col-4 text-truncate float-left"><i class="icon-settings icons"></i> Cấu hình hệ thống</span>
+            </div>
+
+            <div class="row-sm">
+                <div class="col-lg-6 col-12 float-left d-initial">
+                    <div class="card">
+                        <div class="card-header">
+                            Check BHYT
+                        </div>
+                        <div class="card-block">
+                            <div class="form-group row">
+                                <label class="col-sm-6 form-control-label mb-0">Cho phép không check BHYT online <br/>(dùng trong trường hợp cổng BHYT lỗi)</label>  
+                                <div class="col-sm-4 col-8 row">
+                                    <div class="col p-0">
+                                        <span ng-if="allow_no_check_bhyt=='ON'" class="badge badge-danger">ON (đang cho phép)</span>
+                                        <span ng-if="allow_no_check_bhyt!='ON'" class="badge badge-info">OFF (đang cấm)</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-4 p-0 mb-2">
+                                    <button type="button" ng-if="allow_no_check_bhyt=='ON'" ng-click="confCheckBHYTFn('OFF')" class="btn btn-info btn-block"><i class="icons icon-settings fa-lg"></i> Cấm </button>
+                                    <button type="button" ng-if="allow_no_check_bhyt!='ON'" ng-click="confCheckBHYTFn('ON')" class="btn btn-danger btn-block"><i class="icons icon-settings fa-lg"></i> Cho phép </button>
+                                </div>
+                            </div>       
+                        </div>
+                    </div>  
+                </div>          
+                <div class="col-lg-6 col-12 float-left d-initial" ng-repeat="(key, value) in groupConf">
+                    <div class="card">
+                        <div class="card-header">
+                            {{value.vi_type}}
+                        </div>
+                        <div class="card-block">
+                            <div class="form-group row" ng-repeat="(key, conf) in value.configs">
+                                <label class="col-sm-6 form-control-label mb-0">{{conf.vi_name}}</label>  
+                                <div class="col-sm-4 col-8 row">
+                                    <div class="col-7 p-0">
+                                        <input type="text" class="col-sx-6 form-control float-left" ng-model="conf.value" placeholder="9999">
+                                    </div>
+                                    <div class="col-5 p-0">
+                                        <label class="form-control-label float-left m-1"> {{conf.vi_unit}}</label>  
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-4 p-0 mb-2">
+                                        <button type="button" class="btn btn-primary btn-block" ng-click="saveConfFn(conf)"><i class="fa fa-save fa-lg"></i> Lưu </button>
+                                </div>
+                                <div class="col-12 alert alert-success" ng-if="conf.msgSucc">{{conf.msgSucc}}</div>
+                                <div class="col-12 alert alert-danger" ng-if="conf.msgFail">{{conf.msgFail}}</div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>            
+            
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>

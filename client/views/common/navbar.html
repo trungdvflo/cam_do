@@ -1,0 +1,81 @@
+<header class="app-header navbar" ng-controller="navbarCnt">
+    <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button">&#9776;</button>
+    <a class="navbar-brand" ng-if="branchs.length<=1" ui-sref="app.main"></a>
+    <div class="pl-4 pl-md-2" ng-if="branchs.length>1">
+        <select class="ml-4 ml-md-0 form-control" ng-model="br.branch" ng-change="changeBranchFn()" ng-options="b.vi_name for b in branchs track by b.branch_id">
+        </select>
+    </div>
+    <ul class="nav navbar-nav d-md-down-none">
+        <li class="nav-item">
+            <a class="nav-link navbar-toggler sidebar-toggler" href="#">&#9776;</a>
+        </li>
+        <li class="nav-item pl-2 pr-3">
+            <a class="nav-link" ng-class="{'active':$state.includes('app.report.report_menu')}" ui-sref="app.report.report_menu">
+                <i class="icon-map icons h5"></i><span class="row text-center m-auto small text-uppercase">Báo Cáo</span>
+            </a>
+        </li>
+        <li class="nav-item pl-2 pr-3">
+            <a class="nav-link" ng-class="{'active':$state.includes('app.main')}" ui-sref="app.main">
+                <i class="fa fa-line-chart fa-lg"></i><span class="row text-center m-auto small text-uppercase">Thống kê</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto">
+    
+        <!-- <li class="nav-item dropdown">
+            <a class="nav-link" href="#" title="Thông báo" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-bell fa-2x"></i><span class="badge badge-pill badge-danger">{{num_alerts}}</span></a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-header text-center">
+                    <strong>Thông báo</strong>
+                </div>
+                <div ng-repeat="(key, value) in alerts">
+                    <a class="dropdown-item" href="#" ng-click="gotoAlertFn(value.action)">{{value.title}}</a>
+                    <div class="divider"></div>
+                </div>
+            </div>
+        </li> -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="#" title="Liên hệ hỗ trợ" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-phone fa-2x"></i></a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-header text-center">
+                    <strong>Liên hệ hỗ trợ</strong>
+                </div>
+                <div>
+                    <span class="dropdown-item"><a href="tel:0933737819"><i class="icon-phone"></i> 0933.737.819</a> </span>
+                    <div class="divider"></div>
+                </div>
+                <!-- whatsapp -->
+            </div>
+        </li>
+        <!-- <li class="nav-item">
+            <a class="nav-link" href="#"><i class="icon-location-pin"></i></a>
+        </li> -->
+        <li class="nav-item dropdown pl-2">
+            <a class="nav-link dropdown-toggle mr-3" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <!-- <img src="img/avatars/3.jpg" class="img-avatar"> -->
+                <i class="fa fa-user fa-2x"></i>
+                <span class="d-md-down-none">{{user.uinfo.username}}</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-header text-center">
+                    <strong>{{user.uinfo.name}}</strong>
+                </div>
+
+                <!-- <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
+                <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">42</span></a>
+                <div class="dropdown-header text-center">
+                </div> -->
+
+                <!-- <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a> -->
+                <a class="dropdown-item" href="./user/change_pass"><i class="fa fa-wrench"></i> Đổi mật khẩu</a>
+                <div class="divider"></div>
+                <a class="dropdown-item" href="#" ng-click="logoutFn()"><i class="fa fa-lock"></i> Đăng xuất</a>
+            </div>
+        </li>
+        <!-- right nav
+        <li class="nav-item">
+            <a class="nav-link navbar-toggler aside-menu-toggler" href="#">&#9776;</a>
+        </li>-->
+                
+    </ul>
+</header>

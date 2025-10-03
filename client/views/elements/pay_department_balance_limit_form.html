@@ -1,0 +1,63 @@
+<md-dialog class="col-md-5" aria-label="Thêm sửa chi tiết cấu hình">
+    <div class="row card-header pl-2">
+        <h5 class="mt-2">Thêm sửa chi tiết cấu hình</h5>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancelFn()">
+            <i class="fa fa-close"></i>
+        </md-button>
+    </div>
+    <form ng-cloak name="myForm">
+        <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="form-group row">
+                <label class="col-md-12 form-control-label text-md-center font-weight-bold" for="name">CHI TIẾT CẤU HÌNH</label>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label class="col-md-4 form-control-label text-md-right" for="branch">Cơ sở<span class="text-danger">*</span></label>
+                <div class="col-md-6" ng-class="{'has-danger':myForm.branch.$error.required&&formChecked}">
+                    <select name="branch" ng-model="pay_limit.branch" ng-change="branchChangeFn()" class="form-control" placeholder="Cơ sở" ng-options="x.vi_name for x in branchs track by x.branch_id" required></select>
+                    <span ng-show="formChecked && myForm.branch.$error.required" class="text-danger">Vui lòng chọn cơ sở!</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 form-control-label text-md-right" for="block">Khối</label>
+                <div class="col-md-6">
+                    <select name="block" ng-model="pay_limit.block" ng-change="blockChangeFn()" class="form-control" placeholder="Chọn khối" ng-options="x.name for x in blocks | filter : {'branch_id' : filterBlock} track by x.id"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 form-control-label text-md-right" for="dept">Khoa<span class="text-danger">*</span></label>
+                <div class="col-md-6" ng-class="{'has-danger':myForm.dept.$error.required&&formChecked}">
+                    <select name="dept" ng-model="pay_limit.dept" class="form-control" placeholder="Chọn khoa" ng-options="x.vi_name for x in listDept | filter : {'block_id' : filterDept} track by x.department_id" required></select>
+                    <span ng-show="formChecked && myForm.dept.$error.required" class="text-danger">Vui lòng chọn khoa!</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 form-control-label text-md-right" for="warn_rate">Ngưỡng cảnh báo<span class="text-danger">*</span></label>
+                <div class="col-md-6" ng-class="{'has-danger':myForm.warn_rate.$error.required&&formChecked}">
+                    <input class="col-md-4" type="number" ng-pattern="/^[1-9][^\.]*$/" min="0" name="warn_rate" id="warn_rate" required ng-model="pay_limit.warn_rate" class="form-control"><span>%</span>
+                    <span ng-show="formChecked && myForm.warn_rate.$error.required" class="text-danger">Vui lòng nhập ngưỡng cảnh báo!</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 form-control-label text-md-right" for="rate">Ngưỡng khóa<span class="text-danger">*</span></label>
+                <div class="col-md-6" ng-class="{'has-danger':myForm.rate.$error.required&&formChecked}">
+                    <input class="col-md-4"  type="number" ng-pattern="/^[1-9][^\.]*$/" min="0" name="rate" id="rate" required ng-model="pay_limit.rate" class="form-control"><span>%</span>
+                    <span ng-show="formChecked && myForm.rate.$error.required" class="text-danger">Vui lòng nhập ngưỡng khoá!</span>
+                </div>
+            </div>
+        </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+        <span flex></span>
+        <div class="text-danger mr-3" ng-if="msg">{{msg}}</div>
+        <button type="button" class="btn btn-default btn-sm mr-3" ng-click="cancelFn('not useful')">
+            <i class="icon-action-undo icons"></i> Bỏ qua
+        </button>
+        <button type="button" class="btn btn-primary btn-sm mr-2" ng-click="saveFn('useful')">
+            <i class="fa fa-save fa-lg"></i> Lưu
+        </button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

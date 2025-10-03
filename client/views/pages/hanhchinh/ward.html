@@ -1,0 +1,80 @@
+<div class="row" ng-controller="wardCnt as ctrl">
+    <div class="col-lg-12">
+            <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                            <a class="nav-link text-primary" href="#!/hanhchinh/province"><strong>Tỉnh Thành</strong></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary" href="#!/hanhchinh/district"><strong>Quận Huyện</strong></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#!/hanhchinh/ward"><strong>Xã Phường</strong></a>
+                        </li>
+            </ul>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="card" style="border: 0px">
+                    <div class="card-header">
+                        <span class="col-3 text-truncate float-left">
+                            <i class="fa fa-map-marker"></i> Danh sách <strong>Xã Phường</strong></span>
+                        <span class="float-right mr-1">
+                            <button ng-disabled="!selectedDistrict" class="btn btn-primary" ng-click="showWardFormFn(event, {enable:1})">
+                                <i class="icon-magnifier-add icons fa-lg"></i> Thêm </button>
+                        </span>
+                    </div>
+                    <div class="card-block ">
+                        <div class="row">
+                            <label class="col-md-1 col-sm-6 mt-4">
+                                <b>Tỉnh</b>
+                            </label>
+                            <div class="col-md-3 col-sm-6 mt-3">
+
+                                <select name="province" ng-model="selectedProvince" ng-change="getDistrictByProvinceId(selectedProvince)" class="form-control">
+                                    <option value="">--Chọn tỉnh thành--</option>
+                                    <option ng-repeat="(key, value) in provinces" value="{{value.province_id}}">{{value.vi_name}}</option>
+                                </select>
+                            </div>
+                            <label class="col-md-2 col-sm-6 mt-4">
+                                <b>Huyện: </b>
+                            </label>
+                            <div class="col-md-3 col-sm-6 mt-3">
+                                <select name="district" ng-disabled="!selectedProvince" ng-model="selectedDistrict" ng-change="getWardByDistrictId(selectedDistrict)"
+                                    class="form-control">
+                                    <option value="">--Chọn Huyện--</option>
+                                    <option ng-repeat="(key, value) in districts" value="{{value.district_id}}">{{value.vi_name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="table-responsive">
+                            <table id="group-tb" class="table table-bordered table-striped table-sm">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th width="10%">STT</th>
+                                        <th width="40%">Xã phường</th>
+										<th width="30%">Mã bưu chính</th>
+                                        <th width="10%">Viết tắt</th>
+                                        <th width="10%">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(key, value) in wards">
+                                        <td>{{$index + 1}}</td>
+                                        <td nowrap>{{value.vi_name}}</td>
+										<td nowrap>{{value.ward_postal_code}}</td>
+                                        <td nowrap>{{value.auto_suggest_code}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-warning btn-sm" title="Sửa" ng-click="showWardFormFn(event, value, key)">
+                                                <i class="icon-pencil icons"></i> Sửa</button>
+                                        </td>
+                                    </tr>
+                                    <tr ng-show="wards.length == 0 || !wards">
+                                            <td colspan="5">Không có danh sách Xã phường </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

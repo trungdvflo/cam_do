@@ -1,0 +1,151 @@
+<md-dialog class="col-md-9" aria-label="Thêm sửa nhân viên">
+    <div class="row card-header pl-2">
+        <h5 class="mt-2">Thêm/sửa nhân viên</h5>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancelFn()">
+            <i class="fa fa-close"></i>
+        </md-button>
+    </div>
+    <form ng-cloak name="myForm">
+    
+        <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="col-md-6 float-left">
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="username">Tài khoản</label>
+                    <div class="col-md-9">
+                        <input type="text" name="username" id="username" ng-model="employee.username" ng-readonly="employee.isEdit && employee.user_id" class="form-control" placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="name">Tên nhân viên <span class="text-danger">*</span></label>
+                    <div class="col-md-9" ng-class="{'has-danger':myForm.name.$error.required&&formChecked}">
+                        <input type="text" name="name" id="name" required ng-model="employee.name" class="form-control" placeholder="Tên nhân viên">
+                        <span ng-show="formChecked && myForm.name.$error.required" class="text-danger">Vui lòng nhập tên nhân viên</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="name">Mã nhân viên <span class="text-danger">*</span></label>
+                    <div class="col-md-9" ng-class="{'has-danger':(myForm.employee_code.$error.required || myForm.employee_code.$invalid)&&formChecked}">
+                        <input type="text" name="employee_code" id="employee_code" required ng-model="employee.employee_code" maxlength="15" ng-change="employee.employee_code = (employee.employee_code | uppercase)" ng-pattern="'^[a-zA-Z0-9_-]*$'" class="form-control" placeholder="Mã nhân viên">
+                        <span ng-show="formChecked && myForm.employee_code.$error.required" class="text-danger">Vui lòng nhập mã nhân viên.</span>
+                        <span ng-show="formChecked && myForm.employee_code.$invalid" class="text-danger">Không nhập ký tự đặc biệt!</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="alias">Bí danh</label>
+                    <div class="col-md-9">
+                        <input type="text" name="alias" id="alias" ng-model="employee.alias" class="form-control" placeholder="Bí danh">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="gender">Giới tính</label>
+                    <div class="col-md-9">
+                        <label class="mr-4">
+                            <input type="radio" name="gender" id="gender" ng-model="employee.gender" value="male">
+                            <span>Nam</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" id="gender" ng-model="employee.gender" value="female">
+                            <span>Nữ</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group row" ng-class="{'has-danger':myForm.date_of_birth.$error.date}">
+                    <label class="col-md-3 form-control-label text-md-right" for="date_of_birth">Ngày sinh</label>
+                    <div class="col-md-9 input-group col">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i>
+                        </span>
+                        <input type="text" name="date_of_birth" id="date_of_birth" ng-model="employee.date_of_birth" datepicker="" class="form-control ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" placeholder="Ngày sinh" aria-invalid="false" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="email">Email</label>
+                    <div class="col-md-9">
+                        <input type="email" name="email" id="email" ng-model="employee.email" class="form-control" placeholder="Email">
+                        <span ng-show="myForm.email.$dirty && myForm.email.$error.email" class="text-danger">Nhập email không đúng.</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="phone_number">Điện thoại</label>
+                    <div class="col-md-9">
+                        <input type="text" name="phone_number" id="phone_number" numbers-only ng-model="employee.phone_number" class="form-control" placeholder="Điện thoại">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="address">Địa chỉ</label>
+                    <div class="col-md-9">
+                        <input type="text" name="address" id="address" ng-model="employee.address" class="form-control" placeholder="Địa chỉ">
+                    </div>
+                </div>
+            </div>                
+            <div class="col-md-6 float-left">
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" >Kích hoạt</label>
+                    <div class="col-md-9">
+                        <label class="switch switch-default switch-text switch-info d-inline-block">
+                            <input type="checkbox" class="switch-input" ng-model="employee.on">
+                            <span class="switch-label"  data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>                                
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="type">Phân loại</label>
+                    <div class="col-md-9">
+                        <select ng-model="employee.type" class="form-control" ng-options="option.vi_name for option in types track by option.employee_type_id">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="department_id">Khoa/Phòng</label>
+                    <div class="col-md-9">
+                        <select ng-model="employee.department_id" class="form-control" >
+                            <option ng-repeat="(key, value) in departments" value="{{value.department_id}}" >{{value.vi_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="role">Bằng cấp</label>
+                    <div class="col-md-9">
+                        <select ng-model="employee.diploma_id" class="form-control">
+                                <option ng-repeat="(key, value) in diplomas" value="{{value.diploma_id}}" >{{value.vi_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="contract_type">Hợp đồng</label>
+                    <div class="col-md-9">
+                        <select ng-model="employee.contract_type" class="form-control">
+                            <option ng-repeat="(key, value) in contracts" value="{{value.id}}" >{{value.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="cchn">Mã số CCHN</label>
+                    <div class="col-md-9">
+                        <input type="text" name="cchn" id="cchn" ng-model="employee.ma_so_cc_hanh_nghe" class="form-control" placeholder="Mã số CCHN">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="notes">Ghi chú</label>
+                    <div class="col-md-9">
+                        <textarea ng-model="employee.notes" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </md-dialog-content>
+    
+        <md-dialog-actions layout="row">
+        <span flex></span>
+        <div class="text-danger" ng-if="msg">{{msg}}</div>
+        <button type="button" class="btn btn-default btn-sm mr-3" ng-click="cancelFn('not useful')">
+            <i class="icon-action-undo icons"></i> Bỏ qua
+        </button>
+        <button type="button" class="btn btn-primary btn-sm mr-2" ng-click="saveFn('useful')">
+            <i class="fa fa-save fa-lg"></i> Lưu
+        </button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

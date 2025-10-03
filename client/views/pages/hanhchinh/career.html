@@ -1,0 +1,42 @@
+<div class="row" ng-controller="careerCnt as ctrl">    
+    <br>
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <span class="col-3 text-truncate float-left"><i class="fa fa-suitcase"></i> Nghề nghiệp</span>
+                <span class="float-right mr-1">
+                    <button class="btn btn-primary" ng-click="showcareerFormFn(event, {deleted:0})"><i class="icon-magnifier-add icons fa-lg"></i> Thêm  </button>
+                </span>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive">
+                <table id="group-tb" class="table table-bordered table-striped table-sm">
+                    <thead class="bg-light">
+                        <tr>
+                            <th  width="10%">STT</th>
+                            <th  width="20%">Mã Nghề nghiệp</th>
+                            <th  width="50%">Nghề nghiệp</th>
+                            <th  width="10%">Tình trạng</th>
+                            <th  width="10%">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(key, value) in data_list">
+                            <td>{{$index + 1}}</td>
+                            <td nowrap>{{value.code}}</td>
+                            <td>{{value.vi_name}}</td>
+                            <td>
+                                    <span ng-if="value.disable==0" class="text-primary pt-2 ml-3 mr-1"><i class="fa fa-unlock fa-lg mt-2"></i></span>
+                                    <span ng-if="value.disable==1" class="text-secondary pt-2 ml-3 mr-1"><i class="fa fa-lock fa-lg mt-2"></i></span>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-warning btn-sm" title="Sửa" ng-click="showcareerFormFn(event, value, key)"><i class="icon-pencil icons"></i> Sửa</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

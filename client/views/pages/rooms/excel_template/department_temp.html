@@ -1,0 +1,25 @@
+<table id="group-tb" class="table table-bordered table-striped table-sm">
+    <thead>
+        <tr>
+            <th colspan="4">DANH SÁCH KHOA</th>
+        </tr>
+        <tr><th colspan="4"></th></tr>
+        <tr>
+            <th>STT</th>
+            <th>Tên khoa</th>
+            <th>Mô tả</th>
+            <th>Loại</th>
+            <th>Cơ sở</th>
+            <th>Trưởng khoa</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="(key, value) in object">
+            <td align="right">{{$index + 1}}</td>
+            <td>{{value.vi_name}}</td>
+            <td>{{value.vi_description}}</td>
+            <td>{{value.b_vi_name}}</td>
+            <td>{{value.e_head_dept_name}}</td>
+        </tr>
+    </tbody>
+</table>

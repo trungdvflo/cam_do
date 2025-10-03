@@ -1,0 +1,157 @@
+<div class="row" ng-controller="money_inCnt as ctrl">
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs">
+            <li class="nav-item" >
+                <a class="nav-link text-primary" ui-sref="app.camdo({id: 0})">Cầm đồ/Rút quỹ</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link active" ui-sref="app.money_in({type: 3, money_out_id:'', id:0})">Nhập quỹ</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link text-primary" ui-sref="app.trado">Trả đồ/Gia hạn/Thanh lý</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link text-primary" ui-sref="app.baocaongay">Báo cáo ngày</a>
+            </li>
+        </ul>
+    </div>      
+    <div class="col-lg-12">
+        <div class="card border-top-0">
+            <div class="card-header">
+                <span class="col-6 text-truncate float-left"><i class="fa fa-user"></i> 
+                  <span ng-if="form.type==0">Trả cầm đồ</span>
+                  <span ng-if="form.type==1">Gia hạn cầm đồ (đóng lời)</span>
+                  <span ng-if="form.type==2">Thanh lý cầm đồ</span>
+                  <span ng-if="form.type==3">Nộp tiền vào quỹ</span>
+                  <span ng-if="form.type==4">Trả góp 1 phần tiền gốc và đóng lời</span>
+                </span>
+            </div>
+            <div class="card-block">
+              <div class="d-flex flex-row mb-3">
+                <div class="mr-2">Lưu ý:</div>
+                <div class="text-warning" ng-if="form.type != 3">
+                    - Kiểm tra đúng vật cầm và loại nhập <br/>
+                </div>
+                <div class="text-warning" ng-if="form.type == 3">
+                    - Vốn nhập quỹ là khi chuyển tiền vào quỹ hoặc mượn tiền bổ sung quỹ<br/>
+                </div>
+              </div>
+              <div class="row" ng-if="money_out">
+                <div class="col-md-3">
+                    <label>Ngày:</label>
+                    <span class="font-weight-bold">{{money_out.ngay_cam | date:'dd/MM/yyyy'}}</span> - 
+                    <span class="font-weight-bold">{{money_out.ngay_tra_du_tinh | date:'dd/MM/yyyy'}}</span>
+                </div>
+                <div class="col-md-3">
+                    <label>Vật cầm:</label>
+                    <span class="font-weight-bold">{{money_out.vat_cam}}</span>
+                    (<span class="font-weight-bold">{{money_out.dien_giai}}</span>)
+                </div>
+                <div class="col-md-3">
+                    <label>Model:</label>
+                    <span class="font-weight-bold">{{money_out.model}}</span>
+                    (<span class="font-weight-bold">{{money_out.ma_so}}</span>)
+                </div>
+                <div class="col-md-3">
+                    <label>Tiền vay:</label>
+                    <span class="font-weight-bold">{{money_out.tien_vay | number}}</span> - 
+                    <span class="font-weight-bold">{{money_out.nguoi_cam}}</span>
+                </div>
+                <div class="col-md-3">
+                    <label>Liên hệ:</label>
+                    <span class="font-weight-bold">{{money_out.phone}}</span> - 
+                    <span class="font-weight-bold">{{money_out.id_card}}</span>
+                </div>
+                <div class="col-12">
+                    <label>Ghi chú:</label>
+                    <span class="font-weight-bold">{{money_out.ghi_chu}}</span>
+                </div>
+                <div class="form-group col-12" ng-if="money_out.history">
+                  <fieldset>
+                    <legend>Lịch sử gia hạn:</legend>
+                    <div class="row px-md-2 pb-2" ng-repeat="(k, v) in money_out.history">
+                        <div class="col-12" ng-if="v.type!=4">
+                            {{$index+1}})
+                        Ngày GH : <strong>{{v.ngay_tra | date : 'dd/MM/yyyy'}}</strong>.
+                        Lời: <strong>{{v.tien_loi | number}}</strong>.
+                        Ghi chú: <strong>{{v.ghi_chu}}</strong>.
+                        </div>
+                        <div class="col-12" ng-if="v.type==4">
+                            {{$index+1}})
+                        Ngày góp: <strong>{{v.ngay_tra | date : 'dd/MM/yyyy'}}</strong>.
+                        Lời: <strong>{{v.tien_loi | number}}</strong>.
+                        Tiền trả góp: <strong>{{v.tien_tra | number}}</strong>.
+                        Ghi chú: <strong>{{v.ghi_chu}}</strong>.
+                        </div>
+                    </div>
+                    <div class="row px-2 pb-2" ng-if="tong_tien_tra_gop>0">
+                        <div class="col-12"> Tổng đã góp: <strong>{{tong_tien_tra_gop | number}}</strong>. Còn lại: <strong>{{money_out.tien_vay - tong_tien_tra_gop | number}}</strong></div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+              <!-- <div class="row">
+                  <div class="form-group col-md-2 col-3"><button type="button" class="btn btn-primary btn-block" ng-click="processFn('0')" ng-disabled="form.type=='0'"><i class="icon-pencil icons"></i> Trả </button></div>
+                  <div class="form-group col-md-2 col-3"><button type="button" class="btn btn-warning btn-block" ng-click="processFn('1')" ng-disabled="form.type=='1'"><i class="icon-pencil icons"></i> Gia hạn </button></div>
+                  <div class="form-group col-md-2 col-3"><button type="button" class="btn btn-primary btn-block" ng-click="processFn('4')" ng-disabled="form.type=='4'"><i class="icon-pencil icons"></i> Trả góp </button></div>
+                  <div class="form-group col-md-2 col-3"><button type="button" class="btn btn-danger btn-block" ng-click="processFn('2')" ng-disabled="form.type=='2'"><i class="icon-pencil icons"></i> Thanh lý </button></div>
+              </div> -->
+              <form role="form" ng-show="form.type" ng-cloak name="myForm">
+                <div class="row">
+                    <div class="form-group col-md-3" ng-class="{'has-danger':myForm.type.$error.required&&formChecked}">
+                        <label>Loại nhập<span class="text-danger">*</span></label>
+                        <select class="form-control" id="type" name="type" ng-model="form.type" required tabindex="-1" ng-disabled="true">
+                            <option value>---Please select---</option>
+                            <option value="0">Trả cầm đồ</option>
+                            <option value="1">Gia hạn</option>
+                            <option value="2">Thanh lý</option>
+                            <option value="3">Vốn nhập quỹ</option>
+                            <option value="4">Trả góp</option>
+                        </select>
+                        <span ng-show="formChecked && myForm.type.$error.required" class="text-danger">Vui lòng chọn loại</span>
+                    </div>
+                    <div class="form-group col-md-3" ng-if="form.type!=1&&form.type!=4">
+                        <label>Ngày nhập quỹ</label>
+                        <input type="text" class="form-control" datepicker="" ng-model="form.ngay_tra">
+                    </div>
+                    <div class="col-md-3" ng-if="form.type==1||form.type==4">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label>Ngày nhập quỹ</label>
+                                <input type="text" class="form-control" datepicker="" ng-model="form.ngay_tra">
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Ngày dự trả</label>
+                                <input type="text" class="form-control" datepicker="" ng-model="form.ngay_tra_du_tinh">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3" ng-hide="form.type==1" ng-class="{'has-danger':myForm.tien_tra.$error.required&&formChecked}">
+                        <label ng-if="form.type<3">Tiền gốc<span class="text-danger">*</span></label>
+                        <label ng-if="form.type==3">Số tiền nhập quỹ<span class="text-danger">*</span></label>
+                        <label ng-if="form.type==4">Tiền trả góp<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="tien_tra" name="tien_tra" placeholder="1.000.000" ng-disabled="form.type==2||form.type==0" ng-model="form.tien_tra" int-num="9" required>
+                        <span ng-show="formChecked && myForm.tien_tra.$error.required" class="text-danger">Vui lòng nhập tiền gốc</span>
+                    </div>
+                    <div ng-if="form.type!=3" class="form-group col-md-3" ng-class="{'has-danger':myForm.tien_loi.$error.required&&formChecked}">
+                        <label>Tiền lời<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="tien_loi" name="tien_loi" placeholder="1.000.000" ng-model="form.tien_loi" int-num="9" required>
+                        <span ng-show="formChecked && myForm.tien_loi.$error.required" class="text-danger">Vui lòng nhập tiền lời</span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Ghi chú</label>
+                        <input type="text" class="form-control" ng-model="form.ghi_chu">
+                    </div>
+                </div>
+                <div class="row" permission="quan_ly_quy_edit,cam_do_edit">
+                    <div class="form-group col-md-3">
+                        <button type="button" class="btn btn-primary btn-block" ng-click="saveFn()"><i class="fa fa-save fa-lg"></i> Lưu </button>
+                    </div>
+                    <div class="col text-danger">{{msg}}</div>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>

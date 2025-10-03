@@ -1,0 +1,120 @@
+<div class="row" ng-controller="employeeCnt as ctrl">
+    <div class="col-lg-12">
+            <ul class="nav nav-tabs">
+                <li class="nav-item" permission="user_management">
+                    <a class="nav-link text-primary" href="#!/user/group">Nhóm người dùng</a>
+                </li>
+                <li class="nav-item" permission="user_management">
+                    <a class="nav-link text-primary" href="#!/user/management">Người dùng</a>
+                </li>
+                <li class="nav-item" permission="human_resource_manage">
+                    <a class="nav-link active" href="#!/user/employee">Nhân viên</a>
+                </li>
+            </ul>
+    </div>      
+    <div class="col-lg-12">
+        <div class="card border-top-0">
+            <div class="card-header">
+                <span class="col-6 text-truncate float-left"><i class="fa fa-user"></i> QL nhân viên</span>
+                <span class="float-right mr-1">
+                    <button class="btn btn-primary" ng-click="showEmployeeFormFn(event, {enable:1})"><i class="fa fa-plus fa-lg"></i> Thêm  </button>
+                </span>
+            </div>
+            <div class="card-block">
+                <form role="form" method="post" name="UserForm" ng-submit="findFn()">
+                <div class="form-group row">
+                    <div class="col-md-2 col-sm-6 mt-3">
+                        <input type="text" ng-model="form.name" class="form-control" placeholder="Tên nhân viên">
+                    </div>
+                    <div class="col-md-3 col-sm-6 mt-3">
+                        <md-autocomplete
+                            md-no-cache="ctrl.noCache"
+                            md-selected-item="ctrl.selectedItem"
+                            md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                            md-search-text="ctrl.searchText"
+                            md-selected-item-change="ctrl.selectedItemChange(item)"
+                            md-items="item in ctrl.querySearch(ctrl.searchText)"
+                            md-item-text="item.vi_name"
+                            md-min-length="0"
+                            placeholder="--Chọn Khoa--"
+                            md-autoselect="true"
+                            md-menu-class="form-control">
+                          <md-item-template>
+                            <span class="item-title">
+                              <span><strong> {{item.vi_name}} </strong></span>
+                            </span>
+                            <span class="item-metadata">
+                              <span>
+                                - <i>{{item.vi_description}}</i>
+                              </span>
+                            </span>
+                          </md-item-template>
+                        </md-autocomplete>
+                        <!--select ng-model="form.department_id" class="form-control" placeholder="Khoa">
+                            <option value="">--Chọn khoa--</option>
+                            <option ng-repeat="(key, value) in departments" value="{{value.department_id}}" >{{value.vi_name}}</option>
+                        </select-->
+                    </div>
+                    <div class="col-md-2 col-sm-6 mt-3">
+                        <select ng-model="form.type" class="form-control" ng-options="option.vi_name for option in types track by option.employee_type_id">
+                        </select>
+                    </div>
+                    <div class="col-md-2 col-sm-6 mt-3">
+                        <select ng-model="form.enable" class="form-control" ng-options="option.name for option in [{id:'',name:'--Chọn trạng thái--'},{id:'1',name:'Đang sử dụng'},{id:'0',name:'Tạm khóa'}] track by option.id">
+                        </select>
+                    </div>
+                    <div class="col-md-1 col-sm-4 col-6 mt-3 pr-md-0">
+                        <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-search fa-lg"></i> Tìm </button>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-6 mt-3">
+                        <button type="button" class="btn btn-primary btn-block" ng-click="templateToExcelFn()"><i class="fa fa-file-excel-o fa-lg"></i> Xuất Excel All </button>
+                        <download-as-excel class="btn btn-primary btn-block btn-download" ng-show="false" xlname="danh sach nhan vien.xls" sheetname="employees" template="views/pages/users/excel_template/employee.html" object="data_list_all" ></download-as-excel>
+                    </div>
+                    <div class="col-12 col-md-6 mt-4 text-danger" ng-if="msg">{{msg}}</div>
+                </div>
+                </form>
+                <div id="printDiv" class="table-responsive">
+                    <table id="user-tb" class="table table-hover table-outline">
+                        <thead class="thead-default">
+                            <tr>
+                                <th>#</th>
+                                <th>Emp ID</th>
+                                <th>Mã</th>
+                                <th>Tên</th>
+                                <th>Tài khoản</th>
+                                <th>Email</th>
+                                <th>Điện thoại</th>
+                                <th>Khoa phòng</th>
+                                <th>Phân loại</th>
+                                <th>Khóa</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-sm">
+                            <tr ng-repeat="(key, value) in data_list">
+                                <td class="text-right">{{$index + start_record}}</td>
+                                <td>{{value.person_id}}</td>
+                                <td>{{value.employee_code}}</td>
+                                <td nowrap>{{value.name}}</td>
+                                <td><a href="#" ng-click="gotoUserFn(value)"> {{value.username}}</a></td>
+                                <td nowrap>{{value.email}}</td>
+                                <td nowrap>{{value.phone_number}}</td>
+                                <td>{{value.d_vi_name}}</td>
+                                <td>{{value.t_vi_name}}</td>
+                                <td>
+                                    <span ng-if="value.enable==1" class="text-primary pt-2 ml-3 mr-1"><i class="fa fa-unlock fa-lg mt-2"></i> </span>
+                                    <span ng-if="value.enable==0" class="text-secondary pt-2 ml-3 mr-1"><i class="fa fa-lock fa-lg mt-2"></i> </span>
+                                </td>
+                                <td nowrap>
+                                    <button type="button" permission="human_resource_manage" class="btn btn-warning btn-sm" title="Sửa" ng-click="showEmployeeFormFn(event, value, key)"><i class="icon-pencil icons"></i> Sửa</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row" paging></div>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>

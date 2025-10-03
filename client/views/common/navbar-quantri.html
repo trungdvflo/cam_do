@@ -1,0 +1,61 @@
+<header class="app-header navbar" ng-controller="navbarCnt">
+    <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button">&#9776;</button>
+    <a class="navbar-brand" ui-sref="app.main"></a>
+    <ul class="nav navbar-nav d-md-down-none">
+        <li class="nav-item">
+            <a class="nav-link navbar-toggler sidebar-toggler" href="#">&#9776;</a>
+        </li>
+
+        <li class="nav-item">
+            <div class="col-12 mt-0">
+                <div class="float-left mt--1">
+                    <ul class="btn-group pl-0">
+
+                        <li class="btn btn-secondary"  ng-class="{'active':$state.includes('app.report.report_menu')}">
+                            <a class="nav-link text-primary" href="#!/report/report_menu">Báo Cáo</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-12 mt-1">
+                <ul class="nav navbar-nav d-md-down-none">
+                    <ncy-breadcrumb></ncy-breadcrumb>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item d-md-down-none">
+            <a class="nav-link" href="#"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">5</span></a>
+        </li>
+        <li class="nav-item d-md-down-none">
+            <a class="nav-link" href="#"><i class="icon-list"></i></a>
+        </li>
+        <li class="nav-item d-md-down-none">
+            <a class="nav-link" href="#"><i class="icon-location-pin"></i></a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle mr-3" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <img src="img/avatars/6.jpg" class="img-avatar">
+                <span class="d-md-down-none">{{user.uinfo.username}}</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-header text-center">
+                    <strong>{{user.uinfo.name}}</strong>
+                </div>
+
+                <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
+                <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">42</span></a>
+                <div class="dropdown-header text-center">
+                </div>
+
+                <a class="dropdown-item" href="#!/user/my_profile"><i class="fa fa-user"></i> Profile</a>
+                <a class="dropdown-item" href="#!/user/change_pass"><i class="fa fa-wrench"></i> Đổi mật khẩu</a>
+                <div class="divider"></div>
+                <a class="dropdown-item" href="#" ng-click="logoutFn()"><i class="fa fa-lock"></i> Đăng xuất</a>
+            </div>
+        </li>
+        
+    </ul>
+</header>

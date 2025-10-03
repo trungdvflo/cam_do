@@ -1,0 +1,16 @@
+<div class="col float-left">
+    <ul class="pagination" ng-if="paging.total_page > 1">
+        <li class="page-item" ng-class="{'disabled':paging.current_page == 1}" ng-click="FirstPage()"><a class="page-link" href="#">First</a>
+        </li>
+        <li  ng-repeat="page in paging.pages"  class="page-item" ng-click="SetPage(page)"  ng-class="{'active':page == paging.current_page}">
+            <a class="page-link" href="#" >{{ page }}</a>
+        </li>
+        
+        <li class="page-item" ng-class="{'disabled':paging.current_page == paging.total_page}" ng-click="EndPage()"><a class="page-link" href="#">End</a>
+        </li>
+    </ul> 
+</div>
+<div class="col float-left mt-1">
+    <span class="text-nowrap" ng-if="paging.total_record >1 && !paging.isTooLarge">Tổng cộng {{paging.total_record}} dòng, {{paging.total_page}} trang</span>
+    <span class="text-nowrap text-danger" ng-if="paging.isTooLarge">Số lượng tìm được quá lớn, vui lòng kiểm tra điều kiện tìm kiếm.</span>
+</div>

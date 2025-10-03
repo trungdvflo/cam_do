@@ -1,0 +1,62 @@
+<div class="row" ng-controller="user_groupCnt as ctrl">
+    <div class="col-lg-12">
+            <ul class="nav nav-tabs">
+                <li class="nav-item" permission="user_management">
+                    <a class="nav-link active" href="#!/user/group">Nhóm người dùng</a>
+                </li>
+                <li class="nav-item" permission="user_management">
+                    <a class="nav-link text-primary" href="#!/user/management">Người dùng</a>
+                </li>
+                <li class="nav-item" permission="human_resource_manage">
+                    <a class="nav-link text-primary" href="#!/user/employee">Nhân viên</a>
+                </li>
+            </ul>
+    </div>        
+    <div class="col-lg-12">
+        <div class="card border-top-0">
+            <div class="card-header">
+                <span class="col-3 text-truncate float-left"><i class="fa fa-users"></i> Nhóm người dùng</span>
+                <span class="float-right mr-1">
+                    <button class="btn btn-primary" ng-click="showUserFormFn(event, {deleted:0})"><i class="fa fa-plus fa-lg"></i> Thêm  </button>
+                </span>
+                <span class="float-right mr-3">
+                    <button class="btn btn-primary" ng-click="exportToExcel('#group-tb', 'Nhóm user')"><i class="fa fa-file-excel-o fa-lg"></i> Xuất Excel </button>
+                </span>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive">
+                <table id="group-tb" class="table table-hover table-outline">
+                    <thead class="thead-default">
+                        <tr>
+                            <th>#</th>
+                            <th>Parent</th>
+                            <th>Tên</th>
+                            <th>Giá trị</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-sm">
+                        <tr ng-repeat="(key, value) in data_list">
+                            <td class="text-right">{{$index + 1}}</td>
+                            <td>{{value.parent_id}}</td>
+                            <td nowrap>{{value.name}}</td>
+                            <td nowrap>{{value.value}}</td>
+                            <td>
+                                <span ng-if="value.deleted==0" class="text-primary pt-2 ml-3 mr-1"><i class="fa fa-unlock fa-lg mt-2"></i></span>
+                                <span ng-if="value.deleted==1" class="text-secondary pt-2 ml-3 mr-1"><i class="fa fa-lock fa-lg mt-2"></i></span>
+                            </td>
+                            <td nowrap>
+                                <button type="button" permission="user_management" class="btn btn-warning btn-sm" title="Sửa" ng-click="showUserFormFn(event, value, key)"><i class="icon-pencil icons"></i> Sửa</button>
+                                <button type="button" permission="assign_permission" class="btn btn-success btn-sm" title="Quyền" ng-click="goPermissionFn(value)"><i class="fa fa-power-off fa-lg"></i> Quyền</button>
+                                <button type="button" class="btn btn-primary btn-sm" title="Người dùng" ng-click="goUserFn(value)"><i class="fa fa-user fa-lg"></i> Người dùng</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>

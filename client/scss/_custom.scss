@@ -1,0 +1,358 @@
+// Here you can add other styles
+.paging-text {
+    padding: 7px 10px;
+}
+
+.btn-download {
+    top: 0px !important;
+    margin-top: 0px !important;
+    position: absolute;
+}
+
+.app-body .main {
+    background: #fbfbfc;
+    background-color: #fbfbfc;
+}
+
+/*
+.tab-custom{
+    margin-top: -10px;
+    display: block;
+    width: 100%;
+	position: relative;
+	padding: 0.75rem 0.65rem 0rem 0.65rem;
+    margin-bottom: -1px;
+    list-style: none;
+    background-color: #fff;
+    border-bottom: 0px solid #ddd;
+}*/
+.nav-tabs .nav-link.active,
+.nav-tabs .navbar .active.dropdown-toggle,
+.navbar .nav-tabs .active.dropdown-toggle {
+    color: #263238;
+    background: #eceff1;
+    border-color: #cfd8dc;
+    border-bottom-color: #eceff1;
+    border-bottom: 0px;
+}
+
+.nav-tabs {
+    border-bottom: 0px solid #ddd;
+}
+
+.popup-dialog {
+    position: fixed !important;
+    top: 0px;
+    left: 0px;
+}
+
+.popup-dialog-open {
+    position: fixed !important;
+    top: 0px;
+    left: 0px;
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+}
+
+@media print {
+    footer {
+        page-break-after: always;
+    }
+}
+
+@media print {
+    h1 {
+        page-break-before: always;
+    }
+}
+
+//fix firefox red color select-box
+.ng-pristine .ng-invalid-required {
+    box-shadow: none;
+}
+
+.ng-invalid-required {
+    box-shadow: brown
+}
+
+th.sortable {
+    cursor: pointer;
+}
+
+th.sortable:hover {
+    background: #EEE;
+}
+
+.caret-blank {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+}
+
+.caret-up {
+    border-bottom: 8px solid #333;
+}
+
+.caret-down {
+    border-top: 8px solid #333;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+
+.btn-circle.btn-lg {
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 25px;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 35px;
+}
+
+.form-control {
+    border-color: #b0c2b4;
+}
+
+md-autocomplete input:not(.md-input) {
+    /*border: 1px solid !important;*/
+    border: none !important;
+    border-color: #b0c2b4 !important;
+    line-height: 31px !important;
+    height: 31px !important;
+}
+md-autocomplete md-autocomplete-wrap {
+    height: 31px !important;
+}
+.md-whiteframe-1dp,
+.md-whiteframe-z1 {
+    box-shadow: none !important;
+    border: 1px solid !important;
+    border-color: #b0c2b4 !important;
+}
+
+.mt--1 {
+    margin-top: -3px !important;
+}
+
+.boxred {
+    border: 1px solid red;
+    //outline: -webkit-focus-ring-color auto 5px;
+}
+
+.box_success {
+    border: 1px solid green;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 500px;
+    overflow-x: hidden;
+}
+
+@media only screen and (max-width: 480px) {
+    .tab-patient_detail {
+        font-size: 0.7rem;
+    }
+}
+
+.tab-li {
+    font-weight: 600;
+}
+
+.font-weight-600 {
+    font-weight: 600;
+}
+
+.table-report thead th {
+    vertical-align: middle;
+    border-bottom: 1px solid #cfd8dc;
+    text-align: center;
+}
+
+.md_autocomplete_cus .md-whiteframe-z1 {
+    box-shadow: none !important;
+}
+
+.md_autocomplete_cus .md-autocomplete input :focus {
+    color: #607d8b;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: none;
+}
+
+.md_autocomplete_cus {
+    box-shadow: none;
+    border: 1px solid rgb(217, 217, 217);
+    border-radius: 1px;
+}
+
+.md_autocomplete_cus .md-show-clear-button button {
+    height: 30px !important;
+}
+
+.md-confirm-button {
+    color: #fff !important;
+    background-color: #0062cc !important;
+}
+
+.md-cancel-button {
+    color: #000 !important;
+    background-color: #bbbecc !important;
+}
+
+.md-autocomplete-suggestions-container.md-altTheme-theme li.selected,
+.md-autocomplete-suggestions-container.md-altTheme-theme li:hover {
+    background-color: #b6d0dd;
+    border-color: #000;
+}
+
+/*.highlight{
+      background-color: #0062cc !important;
+  }*/
+
+
+.card_bottom {
+    margin-bottom: 0;
+}
+
+.mw-top-menu {
+    max-width: 500px;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+.bg-pink {
+    background-color: #FFF5FA;
+}
+
+.datetime_cus {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+@media all {
+    .page-break {
+        display: none;
+    }
+}
+
+@media print {
+    .page-break {
+        display: block;
+        page-break-inside: always;
+    }
+}
+
+.text-decoration {
+    text-decoration: line-through;
+}
+
+.show-scroll-y {
+    height: 450px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.treament_info_scroll {
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+// .show-scroll-y::-webkit-scrollbar{
+//     height: 8px;
+//     width: 8px;
+// }
+
+.tbl-cls {
+    font-size: 12px;
+    font-weight: 550
+}
+
+.callout-red {
+    border-left-color: #b83717;
+}
+.callout-green {
+    border-left-color: #63e763;
+}
+.callout-yellow {
+    border-left-color: #a0b817;
+}
+.callout-orrange {
+    border-left-color: #b87217;
+}
+.callout-blue {
+    border-left-color: #178ab8;
+}
+.callout-blue-sky {
+    border-left-color: #87CEFA;
+}
+.callout-dark {
+    border-left-color: #1B2932
+}
+.table-sm td, .table-sm th {
+    padding: .3rem;
+}
+
+/* scroll bar */
+.scrollable-menu::-webkit-scrollbar-thumb {
+    height: 50px;
+    background-color: #11171a;
+    background-clip: content-box;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 0px;
+}
+.scrollable-menu::-webkit-scrollbar {
+    position: absolute;
+    width: 3px;
+    margin-left: -3px;
+    -webkit-appearance: none;
+}
+.scrollable-menu::-webkit-scrollbar-track {
+    /* background-color: #304047; */
+    border-right: 1px solid rgba(0, 0, 0, 0.125);
+    /* border-left: 1px solid #1c2429; */
+}
+.scrollable-menu {
+    scrollbar-width: thin;
+}
+
+#popupDialog{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+#popupDialog > * {
+  pointer-events: auto;
+}
+
+.md-dialog-container {
+  height: 100% !important;
+  position: fixed !important;
+  top: 0px !important;
+}

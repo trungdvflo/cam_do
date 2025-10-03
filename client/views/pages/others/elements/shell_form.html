@@ -1,0 +1,100 @@
+<md-dialog class="col-md-9" aria-label="Thêm sửa Shell">
+    <div class="row card-header pl-2">
+        <h5 class="mt-2">Thêm/sửa Shell</h5>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancelFn()">
+            <i class="fa fa-close"></i>
+        </md-button>
+    </div>
+    <form ng-cloak name="myForm">
+    
+        <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="col-md-6 float-left">
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="shell">Shell class <span class="text-danger">*</span></label>
+                    <div class="col-md-9" ng-class="{'has-danger':myForm.shell.$error.required&&formChecked}">
+                        <input type="text" name="shell" id="shell" required ng-model="shell.shell" ng-readonly="shell.isEdit" class="form-control" placeholder="demo">
+                        <span ng-show="formChecked && myForm.shell.$error.required" class="text-danger">Vui lòng nhập class</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="method">Shell method <span class="text-danger">*</span></label>
+                    <div class="col-md-9" ng-class="{'has-danger':myForm.method.$error.required&&formChecked}">
+                        <input type="text" name="method" id="method" required ng-model="shell.method" ng-readonly="shell.isEdit" class="form-control" placeholder="index">
+                        <span ng-show="formChecked && myForm.method.$error.required" class="text-danger">Vui lòng nhập method</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="description ">Mô tả</label>
+                    <div class="col-md-9">
+                        <textarea name="description" id="description" ng-model="shell.description" class="form-control" ></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="params ">Tham số</label>
+                    <div class="col-md-9">
+                        <textarea name="params" id="params" ng-model="shell.params" class="form-control" placeholder="{}"></textarea>
+                    </div>
+                </div>
+            </div>                
+            <div class="col-md-6 float-left">
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="start_time">Thời gian khởi chạy <span class="text-danger">*</span></label>
+                    <div class="col-5" ng-class="{'has-danger':myForm.start_time.$error.required&&formChecked}">
+                        <input type="text" datepicker="" name="start_time" id="start_time" required ng-model="shell.start_time" class="form-control" placeholder="dd/mm/yyy">
+                        <span ng-show="formChecked && myForm.start_time.$error.required" class="text-danger">Vui lòng nhập thời gian chay</span>
+                    </div>
+                    <div class="col-2" ng-class="{'has-danger':myForm.start_time_h.$error.required&&formChecked}">
+                        <input type="text" name="start_time_h" id="start_time_h" required ng-model="shell.start_time_h" class="form-control" placeholder="HH">
+                        <span ng-show="formChecked && myForm.start_time_h.$error.required" class="text-danger">Vui lòng nhập thời gian chay</span>
+                    </div>
+                    <div class="col-2" ng-class="{'has-danger':myForm.start_time_m.$error.required&&formChecked}">
+                        <input type="text" name="start_time_m" id="start_time_m" required ng-model="shell.start_time_m" class="form-control" placeholder="MM">
+                        <span ng-show="formChecked && myForm.start_time_m.$error.required" class="text-danger">Vui lòng nhập thời gian chay</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="repeat">Lặp lại sau</label>
+                    <div class="col-3">
+                        <input type="text" name="repeat" id="repeat" ng-model="shell.repeat" ng-disabled="shell.repeat_type==''" class="form-control" placeholder="repeat">
+                    </div>
+                    <div class="col-6">
+                        <select ng-model="shell.repeat_type" class="form-control" size="1" >
+                            <option value="">Không lặp</option>
+                            <option value="second">Giây</option>
+                            <option value="minute">Phút</option>
+                            <option value="hour">Giờ</option>
+                            <option value="day">Ngày</option>
+                            <option value="week">Tuần</option>
+                            <option value="month">Tháng</option>
+                            <option value="year">Năm</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" >Trạng thái</label>
+                    <div class="col-md-9">
+                        <label class="switch switch-default switch-text switch-info d-inline-block">
+                            <input type="checkbox" class="switch-input" ng-model="shell.on">
+                            <span class="switch-label"  data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>                                
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </md-dialog-content>
+    
+        <md-dialog-actions layout="row">
+        <span flex></span>
+        <div class="text-danger mr-3" ng-if="msg">{{msg}}</div>
+        <button type="button" class="btn btn-default btn-sm mr-3" ng-click="cancelFn('not useful')">
+            <i class="icon-action-undo icons"></i> Bỏ qua
+        </button>
+        <button type="button" class="btn btn-primary btn-sm mr-2" ng-click="saveFn('useful')">
+            <i class="fa fa-save fa-lg"></i> Lưu
+        </button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

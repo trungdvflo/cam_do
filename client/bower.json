@@ -1,0 +1,30 @@
+{
+  "name": "coreui",
+  "version": "1.0.0-alpha.5 (AngularJS)",
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
+    "jquery": "^3.0.0",
+    "tether": "latest",
+    "angular": "latest",
+    "angular-ui-router": "1.0.0-beta.3",
+    "oclazyload": "latest",
+    "angular-breadcrumb": "latest",
+    "angular-loading-bar": "latest",
+    "fontawesome": "latest",
+    "simple-line-icons": "latest",
+    "chart.js": "^2.3.0",
+    "angular-chart.js": "^1.0.3",
+    "angular-material": "^1.2.2",
+    "angular-auto-complete": "^1.5.5",
+    "json-export-excel": "ng-json-export-excel#^1.0.2",
+    "angular-cookies": "^1.6.9",
+    "ngstorage": "^0.3.11",
+    "daterangepicker": "https://github.com/dangrossman/daterangepicker.git",
+    "select2": "~4.0",
+    "angular-ui-grid": "^4.8.3",
+    "html2canvas": "0.4.1",
+    "jspdf": "1.0.272",
+    "angular-ui-notification": "^0.3.6"
+  },
+  "private": true
+}

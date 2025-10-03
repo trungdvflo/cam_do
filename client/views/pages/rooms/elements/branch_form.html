@@ -1,0 +1,52 @@
+<md-dialog class="col-md-4" aria-label="Thêm cơ sở vật chất">
+    <div class="row card-header pl-2">
+        <h5 class="mt-2">Thêm/sửa cơ sở</h5>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancelFn()">
+            <i class="fa fa-close"></i>
+        </md-button>
+    </div>
+    <form ng-cloak name="myForm">
+    
+        <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="col">
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="name">Cơ sở<span class="text-danger">*</span></label>
+                    <div class="col-md-9" ng-class="{'has-danger':myForm.name.$error.required&&formChecked}">
+                        <input type="text" name="name" id="name" required ng-model="branch.vi_name" class="form-control" placeholder="Cơ sở">
+                        <span ng-show="formChecked && myForm.name.$error.required" class="text-danger">Vui lòng nhập tên cơ sở!</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" for="value">Mô tả</label>
+                    <div class="col-md-9">
+                        <textarea ng-model="branch.vi_description" class="form-control" placeholder="Mô tả"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label text-md-right" >Kích hoạt</label>
+                    <div class="col-md-9">
+                        <label class="switch switch-default switch-text switch-info d-inline-block">
+                            <input type="checkbox" class="switch-input" ng-model="branch.on">
+                            <span class="switch-label"  data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>                                
+                        </label>
+                    </div>
+                </div>
+            </div>                
+        </div>
+        </md-dialog-content>
+    
+        <md-dialog-actions layout="row">
+        <span flex></span>
+        <div class="text-danger" ng-if="msg">{{msg}}</div>
+        <button type="button" class="btn btn-default btn-sm mr-3" ng-click="cancelFn('not useful')">
+            <i class="icon-action-undo icons"></i> Bỏ qua
+        </button>
+        <button type="button" class="btn btn-dark btn-sm mr-2" ng-click="saveFn('useful')">
+            <i class="fa fa-save fa-lg"></i> Lưu
+        </button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

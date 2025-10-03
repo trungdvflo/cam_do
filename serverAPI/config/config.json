@@ -1,0 +1,25 @@
+{
+  "server" : {
+    "port" : 2000
+  },
+  "log" :{
+    "path" : "/logs/his2018.log"
+  },
+  "image" : {
+     "url" : "http://localhost/",
+     "physical_path" : "C:\\inetpub\\wwwroot\\"
+  },
+  "separateFolder" : "\\",
+  "sms" : {
+      "active" : 0
+  },
+  "token_check" : 0,
+  "check_https" : 0,
+  "paging_option" : {
+     "limit" : 25
+  },
+  "prescriontion_cash" : {
+     "cash_out" : 50,
+     "cash_in" : 30
+  }
+}

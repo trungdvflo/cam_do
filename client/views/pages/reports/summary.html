@@ -1,0 +1,249 @@
+<div class="row" ng-controller="report_summaryCnt as ctrl">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header mb-3">
+                <span class="col-12 text-truncate float-left" ng-if="oneBranch">
+                    <i class="fa fa-align-justify"></i> Báo cáo tổng hợp</span>
+                <span class="col-12 text-truncate float-left" ng-if="!oneBranch">
+                    <div class="row">
+                        <div class="col-1"> <i class="fa fa-align-justify"></i></div>
+                    </div>
+                </span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-accent-primary ">
+                        <div class="card-header">
+                            <i class="icon-graph icon-bg"></i> Tổng hợp
+                            <div class="card-actions">
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col-3">Nhập-Rút</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{summary.von/1000 | number}}-{{summary.rut_quy/1000 | number}} = {{summary.von-summary.rut_quy | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 pl-3">Trả</div>
+                                <div class="col-9">
+                                    {{summary.tra | number}} + {{summary.tra_loi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 pl-3">Gia hạn</div>
+                                <div class="col-9">
+                                    {{summary.gia_han | number}} + {{summary.gia_han_loi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 pl-3">Thanh lý</div>
+                                <div class="col-9">
+                                    {{summary.thanh_ly | number}} + {{summary.thanh_ly_loi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Tổng trả+lời</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{summary.tong_tra | number}} + {{summary.tong_loi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Vay-Trả</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{summary.tong_vay/1000 | number}}-{{summary.tong_tra/1000 | number}} = {{summary.tong_vay-summary.tong_tra | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Tổng chi</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{summary.tong_chi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Lợi nhuận</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{summary.loi_nhuan | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Thù lao</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{summary.tong_thu_lao | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Lợi-thù lao</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{summary.loi_nhuan-summary.tong_thu_lao | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Tồn quỹ</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{summary.ton_quy | number}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-accent-primary ">
+                        <div class="card-header">
+                            <i class="icon-graph icon-bg"></i> Tháng này
+                            <div class="card-actions">
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col-3">Nhập-Rút</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{this_month.von/1000 | number}}-{{this_month.rut_quy/1000 | number}} = {{this_month.von-this_month.rut_quy | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 pl-3">Trả</div>
+                                <div class="col-9">
+                                    {{this_month.tra | number}} + {{this_month.tra_loi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 pl-3">Gia hạn</div>
+                                <div class="col-9">
+                                    {{this_month.gia_han | number}} + {{this_month.gia_han_loi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 pl-3">Thanh lý</div>
+                                <div class="col-9">
+                                    {{this_month.thanh_ly | number}} + {{this_month.thanh_ly_loi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Tổng trả+lời</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{this_month.tong_tra | number}} + {{this_month.tong_loi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Vay-Trả</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{this_month.tong_vay/1000 | number}}-{{this_month.tong_tra/1000 | number}} = {{this_month.tong_vay-this_month.tong_tra | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Tổng chi</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{this_month.tong_chi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Lợi nhuận</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{this_month.loi_nhuan | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Thù lao</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{this_month.tong_thu_lao | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Lợi-thù lao</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{this_month.loi_nhuan-this_month.tong_thu_lao | number}}
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-3">Tồn quỹ</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{this_month.ton_quy | number}}
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-accent-primary ">
+                        <div class="card-header">
+                            <i class="icon-graph icon-bg"></i> Tháng trước
+                            <div class="card-actions">
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col-3">Nhập-Rút</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{last_month.von/1000 | number}}-{{last_month.rut_quy/1000 | number}} = {{last_month.von-last_month.rut_quy | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 pl-3">Trả</div>
+                                <div class="col-9">
+                                    {{last_month.tra | number}} + {{last_month.tra_loi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 pl-3">Gia hạn</div>
+                                <div class="col-9">
+                                    {{last_month.gia_han | number}} + {{last_month.gia_han_loi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 pl-3">Thanh lý</div>
+                                <div class="col-9">
+                                    {{last_month.thanh_ly | number}} + {{last_month.thanh_ly_loi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Tổng trả+lời</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{last_month.tong_tra | number}} + {{last_month.tong_loi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Vay-Trả</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{last_month.tong_vay/1000 | number}}-{{last_month.tong_tra/1000 | number}} = {{last_month.tong_vay-last_month.tong_tra | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Tổng chi</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{last_month.tong_chi | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Lợi nhuận</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{last_month.loi_nhuan | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Thù lao</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{last_month.tong_thu_lao | number}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">Lợi-thù lao</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{last_month.loi_nhuan-last_month.tong_thu_lao | number}}
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-3">Tồn quỹ</div>
+                                <div class="col-9 p-0 font-weight-bold">
+                                    {{last_month.ton_quy | number}}
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

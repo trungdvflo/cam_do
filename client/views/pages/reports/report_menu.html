@@ -1,0 +1,85 @@
+<div class="row" ng-controller="report_menuCnt as ctrl">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header mb-3">
+                <span class="col-4 text-truncate float-left">
+                    <i class="fa fa-align-justify"></i> Toàn bộ báo cáo</span>
+                <span class="float-right mr-2">
+                    <a class="switch" ng-hide="hideAll" ng-click="hideAllFn()" href="#">
+                        <i class="fa fa-minus-square-o fa-lg"></i>
+                    </a>
+                    <a ng-hide="!hideAll" ng-click="hideAllFn()" href="#">
+                        <i class="fa fa-plus-square-o fa-lg"></i>
+                    </a>
+                </span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 float-left">
+                    <div class="card card-accent-primary ">
+                        <div class="card-header">
+                            <i class="icon-graph icon-bg"></i>{{report_title}}
+                            <div class="card-actions">
+                                <a class="switch" ng-hide="hideBCTC" ng-click="hideBCTC = !hideBCTC" href="#">
+                                    <i class="fa fa-minus-square-o fa-lg"></i>
+                                </a>
+                                <a ng-hide="!hideBCTC" ng-click="hideBCTC = !hideBCTC" href="#">
+                                    <i class="fa fa-plus-square-o fa-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-block" ng-hide="hideBCTC">
+                            <div permission="report_summary" class="row">
+                                <div class="col-2">Biểu 1</div>
+                                <div class="col-9 p-0">
+                                    <a ui-sref="app.report.summary">Báo cáo tổng hợp</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block" ng-hide="hideBCTC">
+                            <div permission="report_chi_phi" class="row">
+                                <div class="col-2">Biểu 2</div>
+                                <div class="col-9 p-0">
+                                    <a ui-sref="app.report.chiphi">Báo cáo Chi phí</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block" ng-hide="hideBCTC">
+                            <div permission="report_rut_nhap_quy" class="row">
+                                <div class="col-2">Biểu 3</div>
+                                <div class="col-9 p-0">
+                                    <a ui-sref="app.report.nhaprutquy">Báo cáo Nhập rút quỹ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 float-left">
+                    <div class="card card-accent-warning">
+                        <div class="card-header">
+                            <i class="icon-graph icon-bg"></i>Báo cáo hoạt động
+                            <div class="card-actions">
+                                <a class="switch" ng-hide="hideBCHD" ng-click="hideBCHD = !hideBCHD" href="#">
+                                    <i class="fa fa-minus-square-o fa-lg"></i>
+                                </a>
+                                <a ng-hide="!hideBCHD" ng-click="hideBCHD = !hideBCHD" href="#">
+                                    <i class="fa fa-plus-square-o fa-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- <div class="card-block" ng-hide="hideBCHD">
+                            <div class="row">
+                                <div class="col-2">Ngoại trú</div>
+                                <div class="col-2">Biểu 1.1</div>
+                                <div class="col-8 p-0">
+                                    <a href="#">Danh sách bệnh nhân ngoại trú (Viện phí)</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

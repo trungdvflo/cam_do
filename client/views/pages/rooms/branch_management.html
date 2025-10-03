@@ -1,0 +1,58 @@
+<div class="row" ng-controller="branch_managementCnt as ctrl">
+    <div class="col-lg-12">
+        <div class="border-bottom-0">
+            <ul class="nav nav-tabs text-uppercase">
+                <li class="nav-item">
+                    <a class="nav-link active" ui-sref="app.branch">DS chi nhánh</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-primary" ui-sref="app.department">DS Phòng</a>
+                </li>
+            </ul>
+        </div>
+    </div> 
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <span class="col-3 text-truncate float-left"><i class="fa fa-hospital-o fa-lg"></i> Danh sách cơ sở</span>
+                <span class="float-right mr-1" permission="catetory_department_edit">
+                    <button class="btn btn-primary" ng-click="showUserFormFn(event, {deleted:0})"><i class="icon-magnifier-add icons fa-lg"></i> Thêm  </button>
+                </span>
+                <span class="float-right mr-3">
+                    <button class="btn btn-primary" ng-click="exportToExcelFn()"><i class="fa fa-file-excel-o fa-lg"></i> Xuất Excel </button>
+                    <download-as-excel class="btn btn-primary btn-block btn-download" ng-show="false" xlname="export_list_branch.xls" sheetname="list_branch" template="views/pages/rooms/excel_template/branch_temp.html" object="data_list" ></download-as-excel>
+                </span>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive">
+                <table id="group-tb" class="table table-bordered table-striped table-sm">
+                    <thead class="bg-secondary">
+                        <tr class="bg-secondary">
+                            <th>#</th>
+                            <th>Cơ sở</th>
+                            <th>Mô tả</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(key, value) in data_list">
+                            <td class="text-right">{{$index + 1}}</td>
+                            <td nowrap>{{value.vi_name}}</td>
+                            <td nowrap>{{value.vi_description}}</td>
+                            <td nowrap>
+                                <span ng-if="value.deleted==0" class="text-primary pt-2 ml-3 mr-1"><i class="fa fa-unlock fa-lg mt-2"></i></span>
+                                <span ng-if="value.deleted==1" class="text-secondary pt-2 ml-3 mr-1"><i class="fa fa-lock fa-lg mt-2"></i></span>
+                            </td>
+                            <td nowrap>
+                                <button permission="catetory_department_edit" type="button" class="btn btn-warning btn-sm" title="Sửa" ng-click="showUserFormFn(event, value, key)"><i class="icon-pencil icons"></i> Sửa</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>

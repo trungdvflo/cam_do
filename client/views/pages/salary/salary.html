@@ -1,0 +1,88 @@
+<div class="row" ng-controller="salaryCnt as ctrl">
+    <!-- <div class="col-lg-12">
+        <ul class="nav nav-tabs">
+            <li class="nav-item" >
+                <a class="nav-link active" ui-sref="app.camdo({id: 0})">Cầm đồ/Rút quỹ</a>
+            </li>
+        </ul>
+    </div>       -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <span class="col-12 text-truncate float-left"><i class="fa fa-user"></i> Nhập thù lao theo chi nhánh...</span>
+            </div>
+            <div class="card-block">
+                <div class="d-flex flex-row mb-3">
+                    <div class="mr-2">Lưu ý:</div>
+                    <div class="text-warning">
+                        - Nhập thông tin rỏ ràng, đầy đủ
+                    </div>
+                </div>
+              <form role="form" ng-cloak name="myForm">
+                <div class="row">
+                    <div class="form-group col-md-3" ng-class="{'has-danger':myForm.balance_date.$error.required&&formChecked}">
+                        <label ng-if="form.type!=0">Ngày chi<span class="text-danger">*</span></label>
+                        <input type="text" id="balance_date" name="balance_date" class="form-control" datepicker="" ng-model="form.balance_date" required>
+                        <span ng-show="formChecked && myForm.balance_date.$error.required" class="text-danger">Vui lòng nhập ngày chi</span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Diễn giải</label>
+                        <input type="text" class="form-control" ng-model="form.note">
+                    </div>
+                    <div class="form-group col-md-3" ng-class="{'has-danger':myForm.balance.$error.required&&formChecked}">
+                        <label ng-if="form.type==0">Tiền vay<span class="text-danger">*</span></label>
+                        <label ng-if="form.type!=0">Số tiền chi<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="balance" name="balance" placeholder="1.000.000" ng-model="form.balance" int-num="9" required>
+                        <span ng-show="formChecked && myForm.balance.$error.required" class="text-danger">Vui lòng nhập tiền</span>
+                    </div>
+                    <div class="form-group col-md-3" ng-class="{'has-danger':myForm.employee.$error.required&&formChecked}">
+                        <label>Người hưởng<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="employee" name="employee" placeholder="Nguyễn Văn A" ng-model="form.employee" required>
+                        <span ng-show="formChecked && myForm.employee.$error.required" class="text-danger">Vui lòng nhập id người hưởng</span>
+                    </div>
+                </div>
+                <div class="row" permission="quan_ly_quy_edit,cam_do_edit">
+                    <div class="form-group col-md-3">
+                        <button type="button" class="btn btn-primary btn-block" ng-click="saveFn()"><i class="fa fa-save fa-lg"></i> Lưu </button>
+                    </div>
+                    <div class="col text-danger">{{msg}}</div>
+                </div>
+              </form>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover table-outline">
+                    <thead class="thead-default">
+                        <tr>
+                            <th>No</th>
+                            <th>Ngày chi</th>
+                            <th>Diễn giải</th>
+                            <th>Số chi</th>
+                            <th>Người hưởng</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-sm">
+                        <tr ng-repeat="(key, value) in salaries">
+                            <td>{{$index + 1}}</td>
+                            <td>{{value.balance_date | date:'dd/MM/yyyy'}}</td>
+                            <td nowrap>{{value.note}}</td>
+                            <td nowrap>{{value.balance | number}}</td>
+                            <td>{{value.employee}}</td>
+                            <td class="text-right" nowrap>
+                                <button ng-if="value.status==0" type="button" class="btn btn-danger btn-sm" title="Xóa" ng-click="deleteFn(event, value)"><i class="icon-pencil icons"></i> Xóa</button>
+                                <button ng-if="value.status==0" type="button" class="btn btn-primary btn-sm" title="Chi" ng-click="payFn(event, value)"><i class="icon-pencil icons"></i> Chi</button>
+                            </td>
+                        </tr>
+                        <tr class="font-weight-bold">
+                          <td colspan="3">Tổng</td>
+                          <td>{{tong_chi | number}}</td>
+                          <td colspan="2"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>

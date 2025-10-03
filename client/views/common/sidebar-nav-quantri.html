@@ -1,0 +1,124 @@
+<div class="sidebar" ng-controller="sidebarCnt">
+    <nav class="sidebar-nav">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.main"><i class="icon-speedometer font-weight-bold"></i>Dashboard <span class="badge badge-info">NEW</span></a>
+            </li>
+            <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('quantri.user')}" permission="menu_module_emp_user">
+                <a class="nav-link nav-dropdown-toggle text-uppercase font-weight-bold" ng-class="{active: $state.includes('quantri.user')}" href="#"><i class="icon-user icons h4"></i>NV - Tài khoản</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item" permission="user_management">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="quantri.user.management"><i class="fa fa-user"></i>Người dùng</a>
+                    </li>
+                    <li class="nav-item" permission="human_resource_manage">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="quantri.user.employee"><i class="fa fa-user-secret"></i>Nhân viên</a>
+                    </li>
+                    <li class="nav-item" permission="assign_permission">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="quantri.user.permission"><i class="fa fa-power-off"></i>Phân quyền User</a>
+                    </li>
+                    <li class="nav-item" permission="permission_management">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="quantri.user.permission_management"><i class="fa fa-power-off"></i>QL quyền</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('quantri.hanhchinh')}" permission="category_hanhchinh">
+                <a class="nav-link nav-dropdown-toggle text-uppercase font-weight-bold" ng-class="{active: $state.includes('quantri.hanhchinh')}" href="#"><i class="fa fa-sitemap fa-lg"></i>DM Hành Chính</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item" permission="category_hanhchinh">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="quantri.hanhchinh.career"><i class="fa fa-suitcase fa-lg"></i>Nghề nghiệp</a>
+                    </li>
+                    <li class="nav-item" permission="category_hanhchinh">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="quantri.hanhchinh.nation"><i class="fa fas fa-globe fa-lg"></i>Quốc gia</a>
+                    </li>
+                    <li class="nav-item" permission="category_hanhchinh">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="quantri.hanhchinh.province"><i class="fa fa-map-marker fa-lg"></i>Địa bàn</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('quantri.other')}" permission="menu_module_other">
+                <a class="nav-link nav-dropdown-toggle text-uppercase font-weight-bold" ng-class="{active: $state.includes('quantri.other')}" href="#"><i class="icon-social-instagram icons h4"></i>Khác</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item" permission="system_configuration">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="quantri.other.config_system"><i class="icon-settings icons"></i>Cấu hình hệ thống</a>
+                    </li>
+                    <li class="nav-item" permission="system_configuration">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="quantri.other.comp_alert"><i class="icon-settings icons"></i>QL Thông báo</a>
+                    </li>
+                    <li class="nav-item" permission="system_configuration">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="quantri.other.shell"><i class="fa fa-terminal"></i>Shell Schedule</a>
+                    </li>
+                    <li class="nav-item" permission="system_configuration">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="quantri.other.monitor"><i class="fa fa-eye"></i>Theo dõi HT</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.main"><i class="icon-speedometer font-weight-bold"></i>Nghiệp vụ <span class="badge badge-danger">NEW</span></a>
+            </li>
+
+            <div demoelement>
+            <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.components')}">
+                <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.components')}" href="#"><i class="icon-puzzle"></i>Components</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.components.buttons"><i class="icon-puzzle"></i>Buttons</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.components.social-buttons"><i class="icon-puzzle"></i>Social Buttons</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.components.cards"><i class="icon-puzzle"></i>Cards</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.components.forms"><i class="icon-puzzle"></i>Forms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.components.switches"><i class="icon-puzzle"></i>Switches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.components.tables"><i class="icon-puzzle"></i>Tables</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.icons')}">
+                <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.icons')}" href="#"><i class="icon-star"></i>Icons</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.icons.fontawesome"><i class="icon-star"></i>Font Awesome</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.icons.simplelineicons"><i class="icon-star"></i>Simple Line Icons</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.widgets"><i class="icon-calculator"></i>Widgets <span class="badge badge-info">NEW</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.charts"><i class="icon-pie-chart"></i>Charts</a>
+            </li>
+            <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('app.pages')}">
+                <a class="nav-link nav-dropdown-toggle" ng-class="{active: $state.includes('app.pages')}" href="#"><i class="icon-star"></i>Pages</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="appSimple.login"><i class="icon-star"></i>Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="appSimple.register"><i class="icon-star"></i>Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="appSimple.404"><i class="icon-star"></i>Error 404</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="appSimple.500"><i class="icon-star"></i>Error 500</a>
+                    </li>
+                </ul>
+            </li>
+            </div>
+
+        </ul>
+    </nav>
+</div>

@@ -1,0 +1,66 @@
+<div class="app flex-row align-items-center">
+    <div class="container" ng-controller="changePassCnt">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card-group mb-0">
+                    <div class="card p-4">
+                        <div class="card-block">
+                            <form role="form" name="userForm" ng-submit="changePassFn()">
+                            <h2>Change Password</h2>
+                            <p class="text-muted">Thay đổi mật khẩu</p>
+                            <span class="text-danger" ng-show="msg">{{msg}}</span>
+                            <div ng-if="!change_pass.success">
+                                <div class="input-group mt-2">
+                                    <span class="input-group-addon"><i class="icon-lock"></i></span>
+                                    <input type="password" class="form-control" id="old_pass" name="old_pass" placeholder="Password cũ"  ng-model="change_pass.old_pass" required ng-minlength="5">
+                                </div>
+                                <div class="input-group">
+                                    <span ng-show="formChecked && userForm.old_pass.$error.required" class="text-danger">Vui lòng nhập mật khẩu mới</span>
+                                    <span ng-show="formChecked && userForm.old_pass.$error.minlength" class="text-danger">Mật khẩu phải ít nhất 5 ký tự</span>
+                                </div>
+                                <div class="input-group mt-3">
+                                    <span class="input-group-addon"><i class="icon-lock"></i></span>
+                                    <input type="password" class="form-control" id="new_pass" name="new_pass" placeholder="Password mới"  ng-model="change_pass.new_pass" required ng-minlength="5">
+                                </div>
+                                <div class="input-group">
+                                    <span ng-show="formChecked && userForm.new_pass.$error.required" class="text-danger">Vui lòng nhập mật khẩu mới</span>
+                                    <span ng-show="formChecked && userForm.new_pass.$error.minlength" class="text-danger">Mật khẩu phải ít nhất 5 ký tự</span>
+                                </div>
+                                <div class="input-group mt-3 mb-4">
+                                    <span class="input-group-addon"><i class="icon-lock"></i></span>
+                                    <input type="password" class="form-control" id="re_new_pass" name="re_new_pass" placeholder="Nhập lại Password mới"  ng-model="change_pass.re_new_pass" required ng-minlength="5">
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button type="submit" class="btn btn-primary px-4">Đồng ý</button>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="change_pass.success">
+                                <div class="row">
+                                    <div class="col-12 text-left mt-3">
+                                        <a href="#!/login" class="btn btn-primary px-4">Đăng nhập</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    <div class="card card-inverse card-primary py-5 d-md-down-none" style="width:44%">
+                        <div class="card-block text-center">
+                            <div>
+                                <h2>Đăng ký</h2>
+                                <p>Liên hệ với phòng dự án công nghệ thông tin.</p>
+                                <div class="p-2" style="background-color:rgb(250, 225, 225);">
+                                <img src="img/logo.png"/></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,152 @@
+
+<div class="row" ng-controller="userCnt as ctrl">
+        <div class="col-lg-12">
+            <ul class="nav nav-tabs">
+                <li class="nav-item" permission="user_management">
+                    <a class="nav-link text-primary" href="#!/user/group">Nhóm người dùng</a>
+                </li>
+                <li class="nav-item" permission="user_management">
+                    <a class="nav-link active" href="#!/user/management">Người dùng</a>
+                </li>
+                <li class="nav-item" permission="human_resource_manage">
+                    <a class="nav-link text-primary" href="#!/user/employee">Nhân viên</a>
+                </li>
+                <li class="nav-item flex">
+                </li>
+            </ul>
+        </div>
+    <div class="col-lg-12">
+        <div class="card border-top-0">
+            <div class="card-header">
+                <span class="col-6 text-truncate float-left"><i class="fa fa-user"></i> Người dùng</span>
+                <span class="float-right mr-1">
+                    <button class="btn btn-primary" ng-click="showUserFormFn(event, {enable:1})"><i class="fa fa-plus fa-lg"></i> Thêm  </button>
+                </span>
+            </div>
+            <div class="card-block"> 
+                <form role="form" method="post" name="UserForm" ng-submit="findFn()">
+                <div class="row">
+                    <div class="col-md-2 col-sm-6 mt-3">
+                        <input type="text" ng-model="form.username" class="form-control" placeholder="Username">
+                    </div>
+                    <div class="col-md-3 col-sm-6 mt-3">
+                        <md-autocomplete
+                            md-no-cache="ctrl.noCache"
+                            md-selected-item="ctrl.selectedItem"
+                            md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                            md-search-text="ctrl.searchText"
+                            md-selected-item-change="ctrl.selectedItemChange(item)"
+                            md-items="item in ctrl.querySearch(ctrl.searchText)"
+                            md-item-text="item.vi_name"
+                            md-min-length="0"
+                            placeholder="--Chọn Khoa--"
+                            md-autoselect="true"
+                            md-menu-class="form-control">
+                          <md-item-template>
+                            <span class="item-title">
+                              <span><strong> {{item.vi_name}} </strong></span>
+                            </span>
+                            <span class="item-metadata">
+                              <span>
+                                - <i>{{item.vi_description}}</i>
+                              </span>
+                            </span>
+                          </md-item-template>
+                        </md-autocomplete>
+                        <!--select ng-model="form.department_id" class="form-control" placeholder="Khoa">
+                            <option value="">--Chọn khoa--</option>
+                            <option ng-repeat="(key, value) in departments" value="{{value.department_id}}" >{{value.vi_name}}</option>
+                        </select-->
+                    </div>
+                    <div class="col-md-3 col-sm-6 mt-3">
+                        <select ng-model="form.group" class="form-control" ng-options="option.name for option in groups track by option.id">
+                        </select>
+                    </div>
+                    <div class="col-md-2 col-sm-6 mt-3">
+                        <select ng-model="form.enable" class="form-control" ng-options="option.name for option in [{id:'',name:'--Tất cả trạng thái--'},{id:'1',name:'Đang sử dụng'},{id:'0',name:'Tạm khóa'}] track by option.id">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 col-sm-4 col-6 mt-3">
+                        <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-search fa-lg"></i> Tìm </button>
+                    </div>
+                    
+                    <div class="col-md-2 col-sm-4 col-6 mt-3">
+                        <button type="button" class="btn btn-primary btn-block" ng-click="printDivFn('#printDiv')"><i class="fa fa-print fa-lg"></i> In Page </button>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-6 mt-3">
+                        <button type="button" class="btn btn-primary btn-block" ng-click="printTemplateFn('print_template_1')"><i class="fa fa-print fa-lg"></i> In Template </button>
+                        <print-template bid="print_template_1" bname="In Template" class="btn btn-primary btn-block" ng-show="false" template="views/pages/users/print_template/user.html" object="data_print" ></print-template>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-6 mt-3">
+                        <button type="button" class="btn btn-primary btn-block" ng-click="exportToExcelFn('#user-tb')"><i class="fa fa-file-excel-o fa-lg"></i> Xuất Excel Page </button>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-6 mt-3">
+                        <button type="button" class="btn btn-primary btn-block" ng-click="templateToExcelFn('download-excel-all')"><i class="fa fa-file-excel-o fa-lg"></i> Xuất Excel </button>
+                        <download-as-excel bid="download-excel-all" bname="Xuất Excel Template" class="btn btn-primary btn-block btn-download" ng-show="false" xlname="export_users.xls" sheetname="users" template="views/pages/users/excel_template/user.html" object="data_list_all" ></download-as-excel>
+                    </div>
+                    <div class="col-12 col-md-6 mt-4 text-danger" ng-if="msg">{{msg}}</div>
+                </div>
+                </form>
+                
+                <div id="printDiv" class="list-group mb-3">
+                    <div class="list-group-item flex-column align-items-start bg-secondary">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-5">
+                                <div class="d-flex w-100 justify-content-between">
+                                <span class="mb-1"># <strong>ID - Tài khoản</strong></span>
+                                Khóa
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-7">
+                                <p class="mb-1">Mã NV - Tên</p>
+                            </div>
+                            <div class="col-md-3 col-sm-7">
+                                Email - Điện thoại
+                            </div>
+                            <div class="col-md-1 col-sm-5">
+                                Nhóm
+                            </div>
+                            <div class="col-md-1 col-sm-5">
+                                Chi nhánh
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-repeat="(key, value) in data_list" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="row border-0" ng-mousemove="showBtnFn(value)" ng-click="showBtnFn(value)">
+                            <div class="col-md-3 col-sm-5">
+                                <div class="d-flex w-100 justify-content-between">
+                                <span class="mb-1">{{$index+start_record}} <strong>{{value.user_id}} - {{value.username}}</strong></span>
+                                <span ng-if="value.enable==1" class="text-primary"><i class="fa fa-unlock fa-lg mt-2"></i> </span>
+                                <span ng-if="value.enable==0" class="text-secondary"><i class="fa fa-lock fa-lg mt-2"></i> </span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-7">
+                                {{value.employee_code}} - {{value.name}}
+                            </div>
+                            <div class="col-md-3 col-sm-7">
+                                {{value.email}} - {{value.phone_number}}
+                            </div>    
+                            <div class="col-md-1 col-sm-5">
+                                {{groupArray[value.acl_group_id]}}
+                            </div>
+                            <div class="col-md-1 col-sm-5">
+                                {{branchArray[value.branch_id]}}
+                            </div>
+                            <div class="col-12" ng-if="selectId == value.user_id">
+                                <button type="button" permission="user_management" class="btn btn-warning btn-sm" title="Sửa" ng-click="showUserFormFn($event, value, key)"><i class="icon-pencil icons"></i> Sửa</button>
+                                <button type="button" permission="assign_permission" class="btn btn-success btn-sm" title="Quyền" ng-click="goPermissionFn(value)"><i class="fa fa-power-off fa-lg"></i> Quyền</button>
+                                <button type="button" permission="assign_permission" class="btn btn-success btn-sm" title="Kích ra" ng-click="kickFn(value, $event)"><i class="fa fa-sign-out fa-lg"></i> Kick</button>
+                                <button type="button" ng-show="value.employee_code" class="btn btn-primary btn-sm" title="Xem nhân viên" ng-click="goEmployeeFn(value)"><i class="fa fa-user"></i> Nhân viên</button>
+                                <button type="button" ng-if="!value.branch_id" permission="" class="btn btn-warning btn-sm" title="Cập nhật chi nhánh" ng-click="showBranchFormFn($event, value, key)"><i class="fa fa-sign-in fa-lg"></i> Chi nhánh</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" paging></div>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>

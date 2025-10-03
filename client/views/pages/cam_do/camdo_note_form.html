@@ -1,0 +1,45 @@
+<md-dialog class="col-md-9" aria-label="Ghi chú">
+    <div class="row card-header pl-2">
+        <h5 class="mt-2">Ghi chú</h5>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancelFn()">
+            <i class="fa fa-close"></i>
+        </md-button>
+    </div>
+    <form ng-cloak name="myForm">
+    
+        <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="col-md-6 float-left">
+                <div class="form-group row">
+                    <div class="col-12">
+                        <p>{{data.vat_cam}} <i>{{data.dien_giai}}</i></p>
+                        <p>{{data.model}} <i>{{data.ma_so}}</i></p>
+                        <p>{{data.tien_vay | number}}</p>
+                        <p>{{data.nguoi_cam}}: {{data.ngay_tra_du_tinh | date : 'dd/MM/yyyy'}}</p>
+                    </div>
+                </div>
+            </div>                
+            <div class="col-md-6 float-left">
+                <div class="form-group row">
+                    <div class="col-12">
+                        <label class="form-control-label" for="note">Ghi chú:</label>
+                        <input type="text" name="note" id="note" ng-model="data.ghi_chu" class="form-control" placeholder="Ghi chú">
+                    </div>
+                </div>
+            </div>
+        </div>
+        </md-dialog-content>
+    
+        <md-dialog-actions layout="row">
+        <span flex></span>
+        <div class="text-danger mr-3" ng-if="msg">{{msg}}</div>
+        <button type="button" class="btn btn-default btn-sm mr-3" ng-click="cancelFn('not useful')">
+            <i class="icon-action-undo icons"></i> Bỏ qua
+        </button>
+        <button type="button" class="btn btn-primary btn-sm mr-2" ng-click="saveFn('useful')">
+            <i class="fa fa-save fa-lg"></i> Lưu
+        </button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

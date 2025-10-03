@@ -1,0 +1,23 @@
+<div class="row" ng-controller="monitorCnt as ctrl">
+    <div class="col-lg-12">
+        <div class="card border-top-0">
+            <div class="card-header">
+                <span class="col-6 text-truncate float-left"><i class="fa fa-eye"></i> Theo dõi hệ thống</span>
+                <span class="float-right mr-1">
+                    <!--<span class="bg-secondary">
+                        <button class="btn btn-primary" ng-click="btnRunFn()">Chạy</button>
+                    </span> -->
+                </span>
+            </div>
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-md-3 col-sm-4">
+                        <span class="card card-inverse card-success text-center py-2" ng-if="status.shells_run"> Trạng thái Shell <i class="fa fa-check fa-lg"></i></span>
+                        <span class="card card-inverse card-warning text-center py-2" ng-if="!status.shells_run"> Trạng thái Shell <i class="fa fa-close fa-lg"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>

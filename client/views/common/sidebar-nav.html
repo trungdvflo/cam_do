@@ -1,0 +1,31 @@
+<div class="sidebar" ng-controller="sidebarCnt">
+    <nav class="sidebar-nav">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.main"><i class="icon-list font-weight-bold"></i>Dashboard <span class="badge badge-info">NEW</span></a>
+            </li> 
+            
+            <li class="nav-item" permission="cam_do_view,cam_do_edit">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.trado" ><i class="icon-cursor font-weight-bold"></i>Cầm đồ </a>
+            </li>
+            <li class="nav-item" permission="da_tra">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.da_tra" ><i class="icon-action-undo font-weight-bold"></i>Đã trả đồ </a>
+            </li>
+            <li class="nav-item" permission="lien_he_den_han">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.den_han" ><i class="icon-speedometer font-weight-bold"></i>Quá hạn </a>
+            </li>
+            <li class="nav-item" permission="thulao_manager">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.salary" ><i class="fa fa-money fa-lg font-weight-bold"></i>Thù lao </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.branch" ><i class="icon-share font-weight-bold"></i>Chi nhánh </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="quantri.user.management" permission="menu_module_quantri"><i class="icon-key font-weight-bold"></i>Quản trị </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.report.report_menu" permission="report_menu_all"><i class="icon-map icons font-weight-bold"></i>Báo cáo </a>
+            </li>
+        </ul>
+    </nav>
+</div>
