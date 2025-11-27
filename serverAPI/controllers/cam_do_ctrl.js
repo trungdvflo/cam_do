@@ -454,7 +454,7 @@ module.exports = class cam_do_ctrl extends base_ctrl {
           return t.responeData(data, false, 1005, "Access denined!");
       }
       data.branch_id = t.session.uinfo.branch_id || data.branch_id;
-      if (!data || Utils.isEmpty(data.report_date) || !data.balance || !data.branch_id) {
+      if (!data || Utils.isEmpty(data.report_date) || Utils.isEmpty(data.balance) || !data.branch_id) {
           logger.error('error data request', t.req.path);
           t.responeData(data, false, 300, "Lỗi dữ liệu gởi");
           return;

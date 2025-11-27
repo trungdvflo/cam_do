@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="col-3">Nhập-Rút</div>
                                 <div class="col-9 p-0 font-weight-bold">
-                                    {{summary.von/1000 | number}}-{{summary.rut_quy/1000 | number}} = {{summary.von-summary.rut_quy | number}}
+                                    {{summary.von/1000 | number}}-{{summary.rut_quy/1000 | number}} = {{(summary.von-summary.rut_quy)/1000 | number}}K
                                 </div>
                             </div>
                             <div class="row">
@@ -53,7 +53,7 @@
                             <div class="row">
                                 <div class="col-3">Vay-Trả</div>
                                 <div class="col-9 p-0 font-weight-bold">
-                                    {{summary.tong_vay/1000 | number}}-{{summary.tong_tra/1000 | number}} = {{summary.tong_vay-summary.tong_tra | number}}
+                                    {{summary.tong_vay/1000 | number}}-{{summary.tong_tra/1000 | number}} = {{(summary.tong_vay-summary.tong_tra)/1000 | number}}K
                                 </div>
                             </div>
                             <div class="row">
@@ -100,7 +100,7 @@
                             <div class="row">
                                 <div class="col-3">Nhập-Rút</div>
                                 <div class="col-9 p-0 font-weight-bold">
-                                    {{this_month.von/1000 | number}}-{{this_month.rut_quy/1000 | number}} = {{this_month.von-this_month.rut_quy | number}}
+                                    {{this_month.von/1000 | number}}-{{this_month.rut_quy/1000 | number}} = {{(this_month.von-this_month.rut_quy)/1000 | number}}K
                                 </div>
                             </div>
                             <div class="row">
@@ -130,7 +130,7 @@
                             <div class="row">
                                 <div class="col-3">Vay-Trả</div>
                                 <div class="col-9 p-0 font-weight-bold">
-                                    {{this_month.tong_vay/1000 | number}}-{{this_month.tong_tra/1000 | number}} = {{this_month.tong_vay-this_month.tong_tra | number}}
+                                    {{this_month.tong_vay/1000 | number}}-{{this_month.tong_tra/1000 | number}} = {{(this_month.tong_vay-this_month.tong_tra) | number}}K
                                 </div>
                             </div>
                             <div class="row">
@@ -177,7 +177,7 @@
                             <div class="row">
                                 <div class="col-3">Nhập-Rút</div>
                                 <div class="col-9 p-0 font-weight-bold">
-                                    {{last_month.von/1000 | number}}-{{last_month.rut_quy/1000 | number}} = {{last_month.von-last_month.rut_quy | number}}
+                                    {{last_month.von/1000 | number}}-{{last_month.rut_quy/1000 | number}} = {{(last_month.von-last_month.rut_quy)/1000 | number}}K
                                 </div>
                             </div>
                             <div class="row">
@@ -207,7 +207,7 @@
                             <div class="row">
                                 <div class="col-3">Vay-Trả</div>
                                 <div class="col-9 p-0 font-weight-bold">
-                                    {{last_month.tong_vay/1000 | number}}-{{last_month.tong_tra/1000 | number}} = {{last_month.tong_vay-last_month.tong_tra | number}}
+                                    {{last_month.tong_vay/1000 | number}}-{{last_month.tong_tra/1000 | number}} = {{(last_month.tong_vay-last_month.tong_tra)/1000 | number}}K
                                 </div>
                             </div>
                             <div class="row">

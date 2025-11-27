@@ -13,7 +13,7 @@ global.fnext = true;
 global.fprocess = true;
 global.fpw = true;
 module.exports = function(options) {
-    return function(req, res, next) {   
+    return function(err, req, res, next) {   
         var path = req.path;
         if(path.indexOf('/f/')>=0){  
             path = path.replace('/f/','');
@@ -37,6 +37,10 @@ module.exports = function(options) {
             var appKey = req.headers.appkey;
             var userKey = req.headers.userkey;
             if(Utils.isEmpty(appKey)){
+                if (err instanceof URIError && err.message.includes('Failed to decode param')) {
+                    console.error('URIError: Invalid URL parameter encountered:', req.originalUrl, err);
+                    return res.status(400).send('Bad Request: Invalid URL parameter.' + req.originalUrl);
+                }
                 next();
             }else{
                 const ip = req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;

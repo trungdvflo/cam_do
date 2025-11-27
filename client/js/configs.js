@@ -2,7 +2,7 @@
  * Created by TrungDV 25/12/2017.
  */
 var Configs = {
-    debug : true,
+    debug : false,
     debugLazyLoad : false,
     mockup: false,
     mockupSuccess:true,
@@ -11,7 +11,7 @@ var Configs = {
     formatLongDate: 'DD/MM/YYYY',
     formatShortDate: 'D/M/YY',
 
-    apiEndPoint : 'http://localhost:2000/api/',
+    apiEndPoint : 'http://camdo.zizo.vn/api/',
     headerReq : {
             'Content-Type': 'application/json'
             ,'appkey' : '55abbe84f48701bc8b3873c72c804bac7a70b3ed2_2942' + '_webapp',

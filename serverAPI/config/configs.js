@@ -6,8 +6,8 @@
  * @copyright 2017 MIT
  */ 
 var Configs = {
-    port : 2000,
-    debug : true,
+    port : 2003,
+    debug : false,
     
     context_path: '/api',
     app_name: 'coresys',
@@ -40,7 +40,7 @@ var Configs = {
         host            : 'localhost',
         port            : '3306',
         user            : 'root',
-        password        : 'abc123456',
+        password        : '1HAbc!23',
         database        : 'cam_do',
         typeCast: function (field, next) {
             if (field.type == 'DATE') {
@@ -56,7 +56,7 @@ var Configs = {
             host            : 'localhost',
             port            : '3306',
             user            : 'root',
-            password        : 'abc123456',
+            password        : '1HAbc!23',
             database        : 'cam_do',
             typeCast: function (field, next) {
                 if (field.type == 'DATE') {
@@ -73,7 +73,7 @@ var Configs = {
             host            : 'localhost',
             port            : '3306',
             user            : 'root',
-            password        : 'abc123456',
+            password        : '1HAbc!23',
             database        : 'cam_do',
             typeCast: function (field, next) {
                 if (field.type == 'DATE') {
@@ -110,9 +110,9 @@ var Configs = {
     },
     app_ips_whitelist: {
         webapp: [
-           '::1',
-           '127.0.0.1',
-           'localhost',
+        //    '::1',
+        //    '127.0.0.1',
+        //    'localhost',
         ],
     },
 
