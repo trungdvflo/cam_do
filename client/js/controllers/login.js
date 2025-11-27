@@ -5,11 +5,14 @@ angular.module('app')
     $scope.loginFn = function() {
         AppRequest.Post('user/login', $rootScope, $scope.form,function(res){
             if(res.success){
-                $rootScope.user = res.data;
+                let user = res.data;
+                $rootScope.user = user;
                 $rootScope.$userkey = res.data.security.secret;
                 $localStorage.userkey = res.data.security.secret;
-                $localStorage.user = res.data;
-                AppRequest.Post('branch/find', $rootScope, {}, function(res){
+                $localStorage.user = user;
+                AppRequest.Post('branch/find', $rootScope, {
+                    user_id: user.uinfo.user_id
+                }, function(res){
                     $localStorage.branchs = res.data;
                     selectBranch($localStorage.user);
                 })

@@ -34,8 +34,12 @@ module.exports = class branch_ctrl extends base_ctrl {
         if(Utils.isSet(t.req.body.vi_name)){
             cond['vi_name LIKE'] = '%'+t.req.body.vi_name+'%';
         }
+        if(Utils.isSet(t.req.body.user_id)){
+            branchM.join('user_branch as ub', 'branch.branch_id = ub.branch_id', 'left');
+            cond['ub.user_id'] = t.req.body.user_id;
+        }
         var orderby = [];
-        orderby['branch_id']  = 'ASC';
+        orderby['branch.branch_id']  = 'ASC';
         branchM.findAsync(cond, orderby).then(result => {
             data = result;
             t.responeData(data, true, 200, "success");

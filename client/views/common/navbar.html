@@ -2,7 +2,8 @@
     <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button">&#9776;</button>
     <a class="navbar-brand" ng-if="branchs.length<=1" ui-sref="app.main"></a>
     <div class="pl-4 pl-md-2" ng-if="branchs.length>1">
-        <select class="ml-4 ml-md-0 form-control" ng-model="br.branch" ng-change="changeBranchFn()" ng-options="b.vi_name for b in branchs track by b.branch_id">
+        <select class="ml-4 ml-md-0 form-control" ng-model="br.branch" ng-change="changeBranchFn()" 
+            ng-options="b.vi_name for b in branchs track by b.branch_id">
         </select>
     </div>
     <ul class="nav navbar-nav d-md-down-none">
