@@ -80,12 +80,11 @@ angular.module('app')
         }
 
         vm.regiterBranchFn = regiterBranchFn;
-
         vm.work_day = new Date();
-
         var user = data_user.uinfo;
-
         vm.user = user;
+        vm.branch = $localStorage.branch;
+        vm.branch_id = $localStorage.branch_id;
 
         function regiterBranchFn() {
             $scope.msg = '';

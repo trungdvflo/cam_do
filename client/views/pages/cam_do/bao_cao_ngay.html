@@ -47,9 +47,9 @@
                   </div>
               </div>
               <div class="row py-3">
-                <div class="col-md-3 text-right text-md-left">Tổng chi: <strong> {{tong_chi | number}}</strong></div>
-                <div class="col-md-3 text-right text-md-left">Tổng thu: <strong>{{tong_thu | number}}</strong></div>
-                <div class="col-md-3 text-right text-md-left">Nhận ban đầu: <strong>{{balance-tong_thu+tong_chi | number}}</strong></div>
+                <div class="col-md-3 text-right text-md-left">Tổng vào: <strong>{{tong_thu | number}}</strong></div>
+                <div class="col-md-3 text-right text-md-left">Tổng ra: <strong> {{tong_chi | number}}</strong></div>
+                <div class="col-md-3 text-right text-md-left">Nhận đầu ngày: <strong>{{balance-tong_thu+tong_chi | number}}</strong></div>
                 <div class="col-md-3 text-right text-md-left">Tồn quỹ: <strong>{{balance | number}}</strong></div>
               </div>
               <div class="table-responsive">
@@ -57,11 +57,8 @@
                       <thead class="thead-default">
                           <tr>
                               <th>No</th>
-                              <th>Ngày cầm</th>
-                              <th>Vật cầm</th>
+                              <th>Vật cầm/Model/Mã số</th>
                               <th>Diễn giải</th>
-                              <th>Model</th>
-                              <th>Mã số</th>
                               <th>Tiền vay</th>
                               <th>Ngày dự tính trả</th>
                               <th>Người giao dịch</th>
@@ -72,27 +69,19 @@
                       <tbody class="table-sm">
                           <tr ng-repeat="(key, value) in data_out">
                               <td>{{$index + 1}}</td>
-                              <td>{{value.ngay_cam | date:'dd/MM/yyyy'}}</td>
-                              <td>{{value.vat_cam}}</td>
-                              <td nowrap>{{value.dien_giai}}</td>
-                              <td>{{value.model}}</td>
-                              <td nowrap>{{value.ma_so}}</td>
+                              <td nowrap ng-if="data.type==0">{{value.vat_cam}}/{{value.model}}/{{value.ma_so}}</td>
+                              <td nowrap ng-if="data.type!=0">{{value.vat_cam}}</td>
+                              <td>{{value.dien_giai}}</td>
                               <td nowrap>{{value.tien_vay | number}}</td>
                               <td>{{value.ngay_tra_du_tinh | date : 'dd/MM/yyyy'}}</td>
                               <td>{{value.nguoi_cam}}</td>
-                              <!-- <td>
-                                  <span ng-if="value.trang_thai==0" class="text-primary pt-2 ml-3 mr-1">Chưa trả </span>
-                                  <span ng-if="value.trang_thai==1" class="text-secondary pt-2 ml-3 mr-1">Đã trả </span>
-                                  <span ng-if="value.trang_thai==2" class="text-secondary pt-2 ml-3 mr-1">Gia hạn </span>
-                                  <span ng-if="value.trang_thai==3" class="text-secondary pt-2 ml-3 mr-1">Thanh lý </span>
-                              </td> -->
                               <td>{{value.ghi_chu}}</td>
                               <td class="text-right" nowrap>
                                   <a href="#" ng-if="value.can_edit" ng-click="updateOutFn(event, value)" title="Sửa"><i class="icon-pencil icons"></i></a>
                               </td>
                           </tr>
                           <tr class="font-weight-bold">
-                            <td colspan="6">Tổng</td>
+                            <td colspan="3">Tổng</td>
                             <td>{{tong_chi | number}}</td>
                             <td colspan="4"></td>
                           </tr>
@@ -104,11 +93,8 @@
                       <thead class="thead-default">
                           <tr>
                               <th>No</th>
-                              <th>Ngày cầm</th>
-                              <th>Vật cầm</th>
+                              <th>Ngày cầm:Vật cầm/Model/Mã số</th>
                               <th>Diễn giải</th>
-                              <th>Model</th>
-                              <th>Mã số</th>
                               <th>Tiền gốc</th>
                               <th>Tiền lãi</th>
                               <th>Người giao dịch</th>
@@ -124,11 +110,9 @@
                                 <i ng-if="value.trang_thai==3" title="Thanh lý" class="icon-check icons text-danger"></i>
                                 {{$index + 1}}
                               </td>
-                              <td>{{value.ngay_cam | date:'dd/MM/yyyy'}}</td>
-                              <td>{{value.vat_cam}}</td>
+                              <td ng-if="value.type!=3">{{value.ngay_cam | date:'dd/MM/yyyy'}}:{{value.vat_cam}}/{{value.model}}/{{value.ma_so}}</td>
+                              <td ng-if="value.type==3">Nhập quỹ</td>
                               <td nowrap>{{value.dien_giai}}</td>
-                              <td>{{value.model}}</td>
-                              <td nowrap>{{value.ma_so}}</td>
                               <td nowrap>{{value.tien_tra | number}}</td>
                               <td nowrap>{{value.tien_loi | number}}</td>
                               <td>{{value.nguoi_cam}}</td>
@@ -138,7 +122,7 @@
                               </td>
                           </tr>
                           <tr class="font-weight-bold">
-                            <td colspan="6">Tổng</td>
+                            <td colspan="3">Tổng</td>
                             <td>{{tong_tra | number}}</td>
                             <td>{{tong_loi | number}}</td>
                             <td colspan="3"></td>

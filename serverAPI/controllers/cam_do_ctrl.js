@@ -174,8 +174,21 @@ module.exports = class cam_do_ctrl extends base_ctrl {
         var mo = new money_outModel(t.db);
         data.created_date = new Date();
         data.ngay_cam = Utils.formatMySQL(data.ngay_cam);
-        if(data.type == Constants.MONEY_OUT_TYPE.cam_do){
-          data.ngay_tra_du_tinh = Utils.formatMySQL(data.ngay_tra_du_tinh);
+        // if(data.type == Constants.MONEY_OUT_TYPE.cam_do){
+        //   data.ngay_tra_du_tinh = Utils.formatMySQL(data.ngay_tra_du_tinh);
+        // }
+        switch (data.type) {
+          case Constants.MONEY_OUT_TYPE.cam_do:
+            data.ngay_tra_du_tinh = Utils.formatMySQL(data.ngay_tra_du_tinh);
+            break;
+          case Constants.MONEY_OUT_TYPE.rut_quy:
+            data.vat_cam = 'Rút quỹ';
+            break;
+          case Constants.MONEY_OUT_TYPE.tien_nha:
+            data.vat_cam = 'Tiền nhà';
+            break;
+          default:
+            data.vat_cam = "Chi khác";
         }
         if(!data.id){
           data.creator = t.session.uinfo.username;

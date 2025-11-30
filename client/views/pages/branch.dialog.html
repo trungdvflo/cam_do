@@ -22,7 +22,7 @@
                                 ng-class="{true:'has-danger', false: 'has-success'}[myForm.branch.$error.required]">
                                 <span flex="35" class="input-group-addon">Chọn chi nhánh</span>
                                 <select name="branch" required class="form-control" ng-model="vm.branch"
-                                    ng-options="d.vi_name for d in vm.branchs"></select>
+                                    ng-options="d.vi_name for d in vm.branchs track by d.branch_id"></select>
                             </div>
                             <div class="input-group mb-3" layout="row">
                                 <span flex="35" class="input-group-addon">Thời gian làm việc</span>
