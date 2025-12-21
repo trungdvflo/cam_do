@@ -82,4 +82,20 @@ angular.module('app.report').config(['$stateProvider','$urlRouterProvider', func
         label: 'Báo cáo Nhập rút quỹ'
       }
     })
+    .state('app.report.miss_report', {
+      url: '/miss_report',
+      templateUrl: 'views/pages/reports/miss_report.html',
+      resolve: {
+        loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            name: 'miss_report',
+            files: ['js/controllers/reports/miss_report.js']
+          }]);
+        }],
+      },
+      ncyBreadcrumb: {
+        label: 'Báo cáo thiếu Report hàng ngày'
+      }
+    })
 }]);

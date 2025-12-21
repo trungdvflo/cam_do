@@ -36,23 +36,30 @@
                   <div class="form-group col-md-2">
                       <input type="text" class="form-control" datepicker="" ng-model="form.report_date" ng-change="findFn()">
                   </div>
-                  <div class="form-group col-md-2" ng-if="has_item_not_rpt || !has_rpt_date" permission="quan_ly_quy_edit,cam_do_edit">
+                  <div class="form-group col-md-2" ng-if="!has_rpt_date" permission="quan_ly_quy_edit,cam_do_edit">
                       <button type="button" class="btn btn-primary btn-block" ng-click="reportFn()">Gởi báo cáo</button>
                   </div>
-                  <div class="form-group col-md-8 pt-1" ng-if="has_item_not_rpt || !has_rpt_date">
+                  <div class="form-group col-md-2" ng-if="has_item_not_rpt && has_rpt_date" permission="quan_ly_quy_edit,cam_do_edit">
+                      <button type="button" class="btn btn-warning btn-block" ng-click="reportFn()">Gởi lại báo cáo</button>
+                  </div>
+                  <div class="form-group col-md-8 pt-1" ng-if="!has_rpt_date">
                       <span class="text-warning">Hãy gởi báo cáo sau 21 giờ cùng ngày, phần phát sinh tính cho ngày hôm sau.</span>
                   </div>
-                  <div class="form-group col-md-4 pt-1" ng-if="!has_item_not_rpt && has_rpt_date">
+                  <div class="form-group col-md-8 pt-1" ng-if="has_item_not_rpt && has_rpt_date">
+                      <span class="text-warning">Dữ liệu đã thay đổi, cần phải gửi lại báo cáo.</span>
+                  </div>
+                  <div class="form-group col-md-8 pt-1" ng-if="!has_item_not_rpt && has_rpt_date">
                       <span class="text-warning">Đã gởi báo cáo ngày này.</span>
                   </div>
               </div>
               <div class="row py-3">
-                <div class="col-md-3 text-right text-md-left">Tổng vào: <strong>{{tong_thu | number}}</strong></div>
-                <div class="col-md-3 text-right text-md-left">Tổng ra: <strong> {{tong_chi | number}}</strong></div>
+                <div class="col-md-3 text-right text-md-left">Tổng tiền vào: <strong>{{tong_thu | number}}</strong></div>
+                <div class="col-md-3 text-right text-md-left">Tổng tiền ra: <strong> {{tong_chi | number}}</strong></div>
                 <div class="col-md-3 text-right text-md-left">Nhận đầu ngày: <strong>{{balance-tong_thu+tong_chi | number}}</strong></div>
                 <div class="col-md-3 text-right text-md-left">Tồn quỹ: <strong>{{balance | number}}</strong></div>
               </div>
               <div class="table-responsive">
+                <span>Danh sách tiền vào</span>
                   <table class="table table-hover table-outline">
                       <thead class="thead-default">
                           <tr>
@@ -81,7 +88,7 @@
                               </td>
                           </tr>
                           <tr class="font-weight-bold">
-                            <td colspan="3">Tổng</td>
+                            <td colspan="3">Tổng chi ra</td>
                             <td>{{tong_chi | number}}</td>
                             <td colspan="4"></td>
                           </tr>
@@ -89,6 +96,7 @@
                   </table>
               </div>
               <div class="table-responsive">
+                <span>Danh sách tiền vào</span>
                   <table class="table table-hover table-outline">
                       <thead class="thead-default">
                           <tr>
@@ -122,7 +130,7 @@
                               </td>
                           </tr>
                           <tr class="font-weight-bold">
-                            <td colspan="3">Tổng</td>
+                            <td colspan="3">Tổng thu vào</td>
                             <td>{{tong_tra | number}}</td>
                             <td>{{tong_loi | number}}</td>
                             <td colspan="3"></td>

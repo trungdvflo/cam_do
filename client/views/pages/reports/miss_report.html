@@ -1,0 +1,57 @@
+<div class="row" ng-controller="missReportCnt as ctrl">
+    <div class="col-lg-12">
+        <div class="card border-top-0">
+            <div class="card-header">
+                <span class="col-6 text-truncate float-left" ng-if="oneBranch"><i class="fa fa-user"></i> Báo cáo chi phí</span>
+                <span class="col-12 text-truncate float-left" ng-if="!oneBranch">
+                    <div class="row">
+                        <div class="col-1"> <i class="fa fa-align-justify"></i></div>
+                    </div>
+                </span>
+            </div>
+            <div class="card-block">
+              <form role="form" ng-cloak name="myForm" ng-submit="findFn()">
+                <div class="row">
+                  <div class="form-group col-md-2 col-6">
+                      <label>Từ ngày</label>
+                      <input type="text" class="form-control" datepicker="" ng-model="form.tu_ngay">
+                  </div>
+                  <div class="form-group col-md-2 col-6">
+                      <label>Đến ngày</label>
+                      <input type="text" class="form-control" datepicker="" ng-model="form.den_ngay">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label class="d-sm-down-none">&nbsp;</label>
+                    <button type="submit" class="btn btn-primary form-control" ><i class="fa fa-search fa-lg"></i> Tìm </button>
+                  </div>
+                </div>
+              </form>
+              <div class="table-responsive">
+                  <table class="table table-hover table-outline">
+                      <thead class="thead-default">
+                          <tr>
+                              <th>No</th>
+                              <th nowrap>Ngày chi</i></th>
+                              <th nowrap>Ngày thu</th>
+                              <th>Ghi chú</th>
+                          </tr>
+                      </thead>
+                      <tbody class="table-sm">
+                          <tr ng-repeat="(key, value) in data_out">
+                              <td>{{$index + 1}}</td>
+                              <td nowrap>
+                                  {{value.ngay_cam | date:'dd/MM/yyyy'}} <br/>
+                              </td>
+                              <td nowrap>
+                                  {{value.ngay_tra | date:'dd/MM/yyyy'}} <br/>
+                              </td>
+                              <td>{{value.ghi_chu}}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+            </div>
+        </div>
+    </div>
+    <!--/.col-->
+</div>
