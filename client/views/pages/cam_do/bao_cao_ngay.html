@@ -53,13 +53,13 @@
                   </div>
               </div>
               <div class="row py-3">
-                <div class="col-md-3 text-right text-md-left">Tổng tiền vào: <strong>{{tong_thu | number}}</strong></div>
-                <div class="col-md-3 text-right text-md-left">Tổng tiền ra: <strong> {{tong_chi | number}}</strong></div>
+                <div class="col-md-3 text-right text-md-left">Tổng nhập quỹ: <strong>{{tong_thu | number}}</strong></div>
+                <div class="col-md-3 text-right text-md-left">Tổng rút quỹ: <strong> {{tong_chi | number}}</strong></div>
                 <div class="col-md-3 text-right text-md-left">Nhận đầu ngày: <strong>{{balance-tong_thu+tong_chi | number}}</strong></div>
                 <div class="col-md-3 text-right text-md-left">Tồn quỹ: <strong>{{balance | number}}</strong></div>
               </div>
               <div class="table-responsive">
-                <span>Danh sách tiền vào</span>
+                <span style="background-color: #cfd8dc; padding: 5px;">Danh sách cầm đồ / nhập quỹ:</span>
                   <table class="table table-hover table-outline">
                       <thead class="thead-default">
                           <tr>
@@ -79,7 +79,7 @@
                               <td nowrap ng-if="data.type==0">{{value.vat_cam}}/{{value.model}}/{{value.ma_so}}</td>
                               <td nowrap ng-if="data.type!=0">{{value.vat_cam}}</td>
                               <td>{{value.dien_giai}}</td>
-                              <td nowrap>{{value.tien_vay | number}}</td>
+                              <td class="text-right" nowrap>{{value.tien_vay | number}}</td>
                               <td>{{value.ngay_tra_du_tinh | date : 'dd/MM/yyyy'}}</td>
                               <td>{{value.nguoi_cam}}</td>
                               <td>{{value.ghi_chu}}</td>
@@ -88,15 +88,15 @@
                               </td>
                           </tr>
                           <tr class="font-weight-bold">
-                            <td colspan="3">Tổng chi ra</td>
-                            <td>{{tong_chi | number}}</td>
+                            <td colspan="3">Tổng rút quỹ</td>
+                            <td class="text-right">{{tong_chi | number}}</td>
                             <td colspan="4"></td>
                           </tr>
                       </tbody>
                   </table>
               </div>
               <div class="table-responsive">
-                <span>Danh sách tiền vào</span>
+                <span style="background-color: #cfd8dc; padding: 5px;">Danh sách trả đồ / gia hạn / nhập quỹ:</span>
                   <table class="table table-hover table-outline">
                       <thead class="thead-default">
                           <tr>
@@ -121,8 +121,8 @@
                               <td ng-if="value.type!=3">{{value.ngay_cam | date:'dd/MM/yyyy'}}:{{value.vat_cam}}/{{value.model}}/{{value.ma_so}}</td>
                               <td ng-if="value.type==3">Nhập quỹ</td>
                               <td nowrap>{{value.dien_giai}}</td>
-                              <td nowrap>{{value.tien_tra | number}}</td>
-                              <td nowrap>{{value.tien_loi | number}}</td>
+                              <td class="text-right" nowrap>{{value.tien_tra | number}}</td>
+                              <td class="text-right" nowrap>{{value.tien_loi | number}}</td>
                               <td>{{value.nguoi_cam}}</td>
                               <td>{{value.ghi_chu}}</td>
                               <td class="text-right" nowrap>
@@ -130,9 +130,9 @@
                               </td>
                           </tr>
                           <tr class="font-weight-bold">
-                            <td colspan="3">Tổng thu vào</td>
-                            <td>{{tong_tra | number}}</td>
-                            <td>{{tong_loi | number}}</td>
+                            <td colspan="3">Tổng nhập quỹ</td>
+                            <td class="text-right">{{tong_tra | number}}</td>
+                            <td class="text-right">{{tong_loi | number}}</td>
                             <td colspan="3"></td>
                           </tr>
                       </tbody>
