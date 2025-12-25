@@ -136,7 +136,7 @@ module.exports = class cam_do_ctrl extends base_ctrl {
           data.ngay_tra = Utils.formatMySQL(data.ngay_tra);
           if(data.type == Constants.MONEY_IN_TYPE.gia_han || data.type == Constants.MONEY_IN_TYPE.tra_gop){
             moUp = {
-              id: money_out.id,
+              id: data.money_out_id,
             };
             if(data.ngay_tra_du_tinh){
               moUp.ngay_tra_du_tinh = Utils.formatMySQL(data.ngay_tra_du_tinh);
