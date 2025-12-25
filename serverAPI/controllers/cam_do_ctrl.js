@@ -66,8 +66,8 @@ module.exports = class cam_do_ctrl extends base_ctrl {
       try{
         var mo = new money_outModel(t.db);
         var mi = new money_inModel(t.db);
+        let moUp = null;
         if(!data.id){
-          let moUp = null;
           if(Number(data.money_out_id) > 0){
             const money_out = await mo.getByKeyAsync(data.money_out_id);
             if(!money_out || !money_out.id){
@@ -134,8 +134,23 @@ module.exports = class cam_do_ctrl extends base_ctrl {
           cond['tien_tra'] = data.tien_tra;
           cond['is_reported'] = 0;
           data.ngay_tra = Utils.formatMySQL(data.ngay_tra);
+          if(data.type == Constants.MONEY_IN_TYPE.gia_han || data.type == Constants.MONEY_IN_TYPE.tra_gop){
+            moUp = {
+              id: money_out.id,
+            };
+            if(data.ngay_tra_du_tinh){
+              moUp.ngay_tra_du_tinh = Utils.formatMySQL(data.ngay_tra_du_tinh);
+            }else{
+              let tem = new Date();
+              tem.setDate(tem.getDate()+14);
+              moUp.ngay_tra_du_tinh = tem;
+            }
+          }
           delete data.ngay_tra_du_tinh;
-          mi.updateAsync(data, cond).then(result => {
+          mi.updateAsync(data, cond).then(async result => {
+            if(moUp.id>0){
+              await mo.updateAsync(moUp);
+            }
             t.responeData(result, true, 200, "success");
           })
           .catch(err => {
