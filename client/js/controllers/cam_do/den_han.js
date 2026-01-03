@@ -92,6 +92,8 @@ angular.module('app')
         {num: 3, text: 'Khách hẹn 3 ngày đóng '},
         {num: 7, text: 'Khách hẹn 1 tuần đóng '},
         {num: 10, text: 'Khách hẹn ngày: '},
+        {num: 0, text: 'SĐT không liên lạc được'},
+        {num: 0, text: 'Khách không bắt máy'},
       ];
       $scope.branch = $localStorage.branch;
       $scope.data = data;

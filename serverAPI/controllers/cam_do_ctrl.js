@@ -16,6 +16,7 @@ var baseModel = require('../models/baseModel.js');
 var money_outModel = require('../models/money_outModel.js');
 var money_inModel = require('../models/money_inModel.js');
 var report_closedModel = require('../models/report_closedModel.js');
+const branchModel = require('../models/branchModel.js');
 
 module.exports = class cam_do_ctrl extends base_ctrl {
     beforeFilter(db, req, res, next, session) {
@@ -188,10 +189,7 @@ module.exports = class cam_do_ctrl extends base_ctrl {
         }
         var mo = new money_outModel(t.db);
         data.created_date = new Date();
-        data.ngay_cam = Utils.formatMySQL(data.ngay_cam);
-        // if(data.type == Constants.MONEY_OUT_TYPE.cam_do){
-        //   data.ngay_tra_du_tinh = Utils.formatMySQL(data.ngay_tra_du_tinh);
-        // }
+        data.ngay_cam = Utils.formatMySQL(data.ngay_cam);        
         switch (data.type) {
           case Constants.MONEY_OUT_TYPE.cam_do:
             data.ngay_tra_du_tinh = Utils.formatMySQL(data.ngay_tra_du_tinh);
@@ -208,12 +206,20 @@ module.exports = class cam_do_ctrl extends base_ctrl {
         if(!data.id){
           data.creator = t.session.uinfo.username;
           data.trang_thai = 0;
-          mo.insertAsync(data).then(result => {
-              t.responeData(result, true, 200, "success");
+          mo.insertAsync(data).then(async result => {
+            var br = new branchModel(t.db);
+            const branch = await br.getByKeyAsync(data.branch_id);
+            var masoUp = {
+              ma_so: branch.ma_so + '0' + result.insertId
+            };
+            let conds = [];
+            conds['id'] = result.insertId;
+            mo.updateAsync(masoUp, conds);
+            t.responeData(result, true, 200, "success");
           })
           .catch(err => {
-              logger.error(err, t.req.path);
-              t.responeData(data, false, 301, "không thể insert");
+            logger.error(err, t.req.path);
+            t.responeData(data, false, 301, "không thể insert");
           })
         }else{
           let conds = [];

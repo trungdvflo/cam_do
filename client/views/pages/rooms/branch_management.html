@@ -29,6 +29,7 @@
                     <thead class="bg-secondary">
                         <tr class="bg-secondary">
                             <th>#</th>
+                            <th>Mã số</th>
                             <th>Cơ sở</th>
                             <th>Mô tả</th>
                             <th>Trạng thái</th>
@@ -39,6 +40,7 @@
                         <tr ng-repeat="(key, value) in data_list">
                             <td class="text-right">{{$index + 1}}</td>
                             <td nowrap>{{value.vi_name}}</td>
+                            <td nowrap>{{value.ma_so}}</td>
                             <td nowrap>{{value.vi_description}}</td>
                             <td nowrap>
                                 <span ng-if="value.deleted==0" class="text-primary pt-2 ml-3 mr-1"><i class="fa fa-unlock fa-lg mt-2"></i></span>

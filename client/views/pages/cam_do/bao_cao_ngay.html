@@ -60,24 +60,24 @@
               </div>
               <div class="table-responsive">
                 <span style="background-color: #cfd8dc; padding: 6px;">Danh sách cầm đồ / rút quỹ:</span>
-                  <table class="table table-hover table-outline">
+                  <table class="table table-sm table-hover table-outline">
                       <thead class="thead-default">
                           <tr>
                               <th>No</th>
-                              <th>Vật cầm/Model/Mã số</th>
+                              <th>Mã số | Vật cầm | Model</th>
                               <th>Diễn giải</th>
-                              <th>Tiền vay</th>
+                              <th class="text-right">Tiền vay</th>
                               <th>Ngày dự tính trả</th>
                               <th>Người giao dịch</th>
                               <th>Ghi chú</th>
                               <th></th>
                           </tr>
                       </thead>
-                      <tbody class="table-sm">
+                      <tbody class="">
                           <tr ng-repeat="(key, value) in data_out">
                               <td>{{$index + 1}}</td>
-                              <td nowrap ng-if="data.type==0">{{value.vat_cam}}/{{value.model}}/{{value.ma_so}}</td>
-                              <td nowrap ng-if="data.type!=0">{{value.vat_cam}}</td>
+                              <td nowrap ng-if="value.type==0">{{value.ma_so}} | {{value.vat_cam}} | {{value.model}}</td>
+                              <td nowrap ng-if="value.type!=0">{{value.vat_cam}}</td>
                               <td>{{value.dien_giai}}</td>
                               <td class="text-right" nowrap>{{value.tien_vay | number}}</td>
                               <td>{{value.ngay_tra_du_tinh | date : 'dd/MM/yyyy'}}</td>
@@ -97,28 +97,28 @@
               </div>
               <div class="table-responsive">
                 <span style="background-color: #cfd8dc; padding: 6px;">Danh sách trả đồ / gia hạn / nhập quỹ:</span>
-                  <table class="table table-hover table-outline">
+                  <table class="table table-sm table-hover table-outline">
                       <thead class="thead-default">
                           <tr>
                               <th>No</th>
-                              <th>Ngày cầm:Vật cầm/Model/Mã số</th>
+                              <th>Mã số | Ngày cầm | Vật cầm | Model</th>
                               <th>Diễn giải</th>
-                              <th>Tiền gốc</th>
-                              <th>Tiền lãi</th>
+                              <th class="text-right">Tiền gốc</th>
+                              <th class="text-right">Tiền lãi</th>
                               <th>Người giao dịch</th>
                               <th>Ghi chú</th>
                               <th></th>
                           </tr>
                       </thead>
-                      <tbody class="table-sm">
+                      <tbody class="">
                           <tr ng-repeat="(key, value) in data_in">
                               <td>
+                                {{$index + 1}}
                                 <i ng-if="value.trang_thai==1" title="Trả đồ" class="icon-check icons text-primary"></i>
                                 <i ng-if="value.trang_thai==2" title="Gia hạn" class="icon-clock icons text-primary"></i>
                                 <i ng-if="value.trang_thai==3" title="Thanh lý" class="icon-check icons text-danger"></i>
-                                {{$index + 1}}
                               </td>
-                              <td ng-if="value.type!=3">{{value.ngay_cam | date:'dd/MM/yyyy'}}:{{value.vat_cam}}/{{value.model}}/{{value.ma_so}}</td>
+                              <td ng-if="value.type!=3">{{value.ma_so}} | {{value.ngay_cam | date:'dd/MM/yyyy'}}  | {{value.vat_cam}}  | {{value.model}}</td>
                               <td ng-if="value.type==3">Nhập quỹ</td>
                               <td nowrap>{{value.dien_giai}}</td>
                               <td class="text-right" nowrap>{{value.tien_tra | number}}</td>

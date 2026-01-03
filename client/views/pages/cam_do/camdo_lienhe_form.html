@@ -1,4 +1,4 @@
-<md-dialog class="col-md-9" aria-label="Ghi chú">
+<md-dialog class="col-md-6" aria-label="Ghi chú">
     <div class="row card-header pl-2">
         <h5 class="mt-2">Ghi chú</h5>
         <span flex></span>
@@ -9,23 +9,25 @@
     <form role="form" ng-cloak name="myForm">
         <md-dialog-content>
         <div class="md-dialog-content">
-            <div class="col-md-6 float-left">
+            <div class="col-md-5 float-left">
                 <div class="form-group row">
                     <div class="col-12">
-                        <p class="my-0">{{data.vat_cam}} <i>{{data.dien_giai}}</i></p>
-                        <p class="my-0">{{data.model}} <i>{{data.ma_so}}</i></p>
-                        <p class="my-0">{{data.tien_vay | number}}</p>
+                        <p class="my-0">Mã số: <b>{{data.ma_so}}</b></p>
+                        <p class="my-0">{{data.vat_cam}} <i>{{data.model}}</i></p>
+                        <p class="my-0">{{data.dien_giai}} </p>
+                        <p class="my-0">Tiền vay: {{data.tien_vay | number}}</p>
                         <p class="my-0">Khách: {{data.nguoi_cam}}</p>
                         <p class="my-0">Ghi chú: {{data.ghi_chu}}</p>
                         <p class="my-0">{{data.ngay_cam | date : 'dd/MM/yyyy'}} - {{data.ngay_tra_du_tinh | date : 'dd/MM/yyyy'}}</p>
                         <p class="text-danger my-0">Quá hạn {{data.over_due_days | number : 0}} ngày</p>
                         <p class="my-0">SĐT: {{data.phone}}</p>
-                        <p class="my-0">Số lần liên hệ: {{data.status_call | number : 0}}</p>
-                        <p class="my-0" ng-bind-html="data.note_call"></p>
+                        <p class="my-0">Số lần đã liên hệ: {{data.status_call | number : 0}}</p>
+                        <!-- <p class="my-0" ng-bind-html="data.note_call"></p> -->
+                         <p class="my-0">{{data.note_call}}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 float-left">
+            <div class="col-md-7 float-left">
                 <div class="form-group row" ng-class="{'has-danger':myForm.note_call_input.$error.required&&formChecked}">
                     <div class="col-12">
                         <label class="form-control-label" for="note">Liên hệ:<span class="text-danger">*</span></label>
