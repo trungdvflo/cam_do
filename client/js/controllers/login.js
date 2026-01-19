@@ -37,7 +37,7 @@ angular.module('app')
                 if(b.branch_id==user.uinfo.branch_id){
                     $localStorage.branch = b;
                     $localStorage.branch_id = b.branch_id;
-                    $localStorage.branchs = [b];
+                    // $localStorage.branchs = [b];
                     $location.path("/loading-page");
                 }
             }
