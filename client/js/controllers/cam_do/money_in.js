@@ -17,6 +17,7 @@ angular.module('app')
      */
     function init(){
       $scope.branch = $localStorage.branch;
+      $scope.tong_tien_tra_gop = 0;
       if ($stateParams && $stateParams.money_out_id>0 && $stateParams.type != MONEY_IN_TYPE.von) {
         getMoneyOut($stateParams.money_out_id);
       }else if ($stateParams && $stateParams.id>0) {
@@ -38,6 +39,7 @@ angular.module('app')
           return;
       }
       var data = Object.assign({},$scope.form);  // copy object
+      delete data.ls;
       AppRequest.Post('cam_do/save_in', $rootScope, data,function(res){
           if(res.success){
               $location.path('/baocaongay');

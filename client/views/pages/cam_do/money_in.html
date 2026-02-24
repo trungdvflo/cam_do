@@ -134,8 +134,16 @@
                         <span ng-show="formChecked && myForm.tien_tra.$error.required" class="text-danger">Vui lòng nhập tiền gốc</span>
                     </div>
                     <div ng-if="form.type!=3" class="form-group col-md-3" ng-class="{'has-danger':myForm.tien_loi.$error.required&&formChecked}">
-                        <label>Tiền lời<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="tien_loi" name="tien_loi" placeholder="1.000.000" ng-model="form.tien_loi" int-num="9" required>
+                        <div class="row">
+                          <div class="col-9">
+                            <label>Tiền lời<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="tien_loi" name="tien_loi" placeholder="1.000.000" ng-model="form.tien_loi" int-num="9" required ng-keyup="form.ls=100*form.tien_loi/(money_out.tien_vay-tong_tien_tra_gop)">
+                          </div>
+                          <div class="col-3">
+                            <label>Ls %</label>
+                        <input type="text" class="form-control" id="ls" name="ls" placeholder="3" ng-model="form.ls" ng-keyup="form.tien_loi=(money_out.tien_vay-tong_tien_tra_gop)*form.ls/100"/>
+                          </div>
+                        </div>
                         <span ng-show="formChecked && myForm.tien_loi.$error.required" class="text-danger">Vui lòng nhập tiền lời</span>
                     </div>
                     <div class="form-group col-md-6">
