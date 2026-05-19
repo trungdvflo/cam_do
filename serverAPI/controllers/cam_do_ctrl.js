@@ -195,13 +195,13 @@ module.exports = class cam_do_ctrl extends base_ctrl {
             data.ngay_tra_du_tinh = Utils.formatMySQL(data.ngay_tra_du_tinh);
             break;
           case Constants.MONEY_OUT_TYPE.rut_quy:
-            data.vat_cam = 'Rút quỹ';
+            data.vat_cam = data.vat_cam | 'Rút quỹ';
             break;
           case Constants.MONEY_OUT_TYPE.tien_nha:
-            data.vat_cam = 'Tiền nhà';
+            data.vat_cam = data.vat_cam | 'Tiền nhà';
             break;
           default:
-            data.vat_cam = "Chi khác";
+            data.vat_cam = data.vat_cam | "Chi khác";
         }
         if(!data.id){
           data.creator = t.session.uinfo.username;
